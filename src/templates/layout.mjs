@@ -152,7 +152,8 @@ export function renderDocument(ctx, page, { bodyClass = '', noindex = false } = 
     <meta name="twitter:description" content="${esc(page.description)}">
     <meta name="twitter:image" content="${esc(ogImage)}">
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/assets/logo.svg">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <link rel="icon" href="/assets/icon-512.png" sizes="512x512" type="image/png">
     <link rel="stylesheet" href="/assets/styles.css">
     ${fontPreload}
     ${headScript(ctx, urls)}
