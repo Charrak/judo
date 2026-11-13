@@ -155,8 +155,16 @@ Diese Datei regelmäßig kopieren (z. B. per Cron auf ein zweites Volume).
 
 **IP-Adresse finden:** ☰ → *Compute* → *Instances* → Instanz `atai-judo` anklicken →
 Abschnitt **Instance access** bzw. **Primary VNIC** → **Public IPv4 address** (mit
-Kopiersymbol). Fehlt dort eine öffentliche IP, wurde die Instanz ohne sie angelegt:
-*Attached VNICs* → VNIC → *Assign public IP*.
+Kopiersymbol).
+
+Eine Adresse aus `10.0.0.0/8` (z. B. `10.1.0.239`) ist die **private** Adresse im VCN –
+darüber ist der Server aus dem Internet nicht erreichbar. Fehlt die öffentliche IP:
+
+1. *Attached VNICs* → die VNIC öffnen → **IPv4 Addresses** → Zeile der privaten
+   Adresse → Menü (⋮) → **Edit** → **Ephemeral public IP** → speichern.
+2. Prüfen, dass das Subnetz **öffentlich** ist: Route Table enthält
+   `0.0.0.0/0 → Internet Gateway`.
+3. Security List: TCP 22 von deiner IP, TCP 80/443 von `0.0.0.0/0`.
 
 **Verbinden:**
 
