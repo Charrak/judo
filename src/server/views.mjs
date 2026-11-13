@@ -32,7 +32,7 @@ export function layout({ title, active = '', body, session, counts = {}, flash =
   <meta name="robots" content="noindex, nofollow">
   <meta name="csrf" content="${esc(session?.csrf ?? '')}">
   <title>${esc(title)} · ATAI Studio</title>
-  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon.png" type="image/png">
   <link rel="stylesheet" href="/admin/assets/admin.css">
   <script src="/admin/assets/admin.js" defer></script>
 </head>
@@ -40,7 +40,7 @@ export function layout({ title, active = '', body, session, counts = {}, flash =
   <header class="topbar">
     <div class="topbar__inner">
       <a class="topbar__brand" href="/admin/">
-        <img src="/assets/logo.svg" alt="" width="34" height="34">
+        <img src="/assets/logo-mark.webp" alt="" width="34" height="34" decoding="async">
         <span>ATAI <em>Studio</em></span>
       </a>
       <nav class="tabs" aria-label="Bereiche">${tabs}</nav>
@@ -68,13 +68,13 @@ export function authLayout({ title, body, flash = '' }) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
   <title>${esc(title)} · ATAI Studio</title>
-  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon.png" type="image/png">
   <link rel="stylesheet" href="/admin/assets/admin.css">
 </head>
 <body class="admin admin--auth"${flash ? ` data-flash="${esc(flash)}"` : ''}>
   <main class="auth">
     <div class="auth__card">
-      <img class="auth__logo" src="/assets/logo.svg" alt="" width="64" height="64">
+      <img class="auth__logo" src="/assets/logo.webp" alt="" width="150" height="150" decoding="async">
       <p class="auth__brand">ATAI <em>Studio</em></p>
       ${body}
     </div>

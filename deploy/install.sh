@@ -75,6 +75,23 @@ systemctl daemon-reload
 systemctl enable --now atai-judo >/dev/null
 systemctl restart atai-judo
 
+# Die Oracle-Images bringen eine iptables-Regel mit, die ausschließlich SSH
+# durchlässt und alles andere verwirft. Ohne diesen Schritt bleibt die Seite
+# von außen unerreichbar, obwohl Security List und NSG offen sind.
+log "Lokale Firewall: 80 und 443 freigeben"
+for port in 80 443; do
+  if command -v iptables >/dev/null 2>&1; then
+    if ! iptables -C INPUT -p tcp --dport "$port" -j ACCEPT 2>/dev/null; then
+      iptables -I INPUT -p tcp --dport "$port" -j ACCEPT || log "Konnte Regel für Port $port nicht setzen (kein iptables?)"
+    fi
+  fi
+done
+if command -v netfilter-persistent >/dev/null 2>&1; then
+  netfilter-persistent save >/dev/null 2>&1 || true
+elif [[ -d /etc/iptables ]]; then
+  iptables-save > /etc/iptables/rules.v4 2>/dev/null || true
+fi
+
 log "nginx konfigurieren für $DOMAIN"
 sed -e "s#atai-judo-academy\.com#$DOMAIN#g" \
     -e "s#/srv/atai-judo#$APP_DIR#g" \
@@ -101,7 +118,17 @@ done
 curl -fsS http://127.0.0.1:3000/de/ >/dev/null || die "Der Dienst antwortet nicht. Log: journalctl -u atai-judo -n 40"
 
 if [[ $IS_IP -eq 1 ]]; then
-  cat <<INFO
+  log "Tägliche Sicherung einrichten"
+install -m 755 "$APP_DIR/deploy/backup.sh" /usr/local/bin/atai-backup
+cat > /etc/cron.d/atai-backup <<'CRON'
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+15 3 * * * root /usr/local/bin/atai-backup >> /var/log/atai-backup.log 2>&1
+CRON
+chmod 644 /etc/cron.d/atai-backup
+/usr/local/bin/atai-backup >/dev/null 2>&1 || log "Erste Sicherung übersprungen"
+
+cat <<INFO
 
 $(printf '\033[1;32m✓ Fertig – Betrieb ohne Domain.\033[0m')
 
@@ -123,7 +150,7 @@ Noch offen:
 Betrieb:
    systemctl status atai-judo
    journalctl -u atai-judo -f
-   Sicherung: tar czf /root/atai-\$(date +%F).tar.gz -C $APP_DIR content data
+   Sicherung: atai-backup            (täglich 03:15, Ablage /var/backups/atai)
 INFO
 else
   cat <<INFO
@@ -147,6 +174,6 @@ Nächste Schritte:
 Betrieb:
    systemctl status atai-judo
    journalctl -u atai-judo -f
-   Sicherung: tar czf /root/atai-\$(date +%F).tar.gz -C $APP_DIR content data
+   Sicherung: atai-backup            (täglich 03:15, Ablage /var/backups/atai)
 INFO
 fi

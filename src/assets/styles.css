@@ -462,7 +462,11 @@ html[dir='rtl'] .legal__tocIcon {
 .brand__mark {
   width: 46px;
   height: 46px;
-  border-radius: 50%;
+  /* Das Wappen liegt auf weißem Grund – als gerundete Kachel statt als Kreis,
+     damit die Schwünge und die Füße nicht angeschnitten werden. */
+  border-radius: 12px;
+  background: #fff;
+  object-fit: contain;
 }
 
 .brand__text {
@@ -2203,10 +2207,13 @@ html[data-entry='pending'] .welcome,
 }
 
 .welcome__logo {
-  width: 74px;
-  height: 74px;
+  width: 96px;
+  height: 96px;
   margin-inline: auto;
-  border-radius: 50%;
+  border-radius: 20px;
+  background: #fff;
+  object-fit: contain;
+  padding: 2px;
 }
 
 .welcome__brand {

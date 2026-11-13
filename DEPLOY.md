@@ -243,6 +243,34 @@ Weitere Stolpersteine:
   anderer Schlüssel als der, der bei der Instanz hinterlegt wurde.
 - Beim ersten Verbinden mit `yes` bestätigen.
 
+## Firewall auf dem Server selbst (Oracle-Images)
+
+Die von Oracle bereitgestellten Ubuntu-Images bringen eine eigene `iptables`-Regel
+mit, die **nur SSH** durchlässt:
+
+```
+-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
+-A INPUT -j REJECT --reject-with icmp-host-prohibited
+```
+
+Alles andere wird auf dem Server verworfen – auch dann, wenn Security List und NSG
+den Port freigeben. Symptom: SSH funktioniert, Port 80/443 laufen in einen Timeout.
+
+```bash
+sudo iptables -I INPUT -p tcp --dport 80 -j ACCEPT
+sudo iptables -I INPUT -p tcp --dport 443 -j ACCEPT
+
+# dauerhaft (sonst nach dem nächsten Neustart wieder weg)
+sudo netfilter-persistent save
+# falls nicht vorhanden:
+sudo sh -c 'iptables-save > /etc/iptables/rules.v4'
+```
+
+`deploy/install.sh` erledigt das inzwischen automatisch mit.
+
+Nachweis, dass es daran lag: `sudo iptables -S INPUT` zeigt die REJECT-Regel, und der
+Zähler davor wächst mit jedem Verbindungsversuch von außen.
+
 ## Firewall: Security List *und* NSG
 
 Beim Anlegen über den Assistenten entsteht neben der Security List oft eine
