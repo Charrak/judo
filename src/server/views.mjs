@@ -321,15 +321,15 @@ export function textsPage({ lang, languages, groups, total, overrides, query, ch
     <p class="emptyfilter" data-empty-filter hidden>Keine Felder gefunden.</p>
     <form class="texts" data-text-editor data-lang="${esc(lang)}" data-endpoint="/api/admin/texts">
       ${body}
-    </form>
 
-    <div class="savebar" data-savebar hidden>
-      <p><strong data-dirty-count>0</strong> Änderungen</p>
-      <div class="savebar__actions">
-        <button class="btn btn--ghost" type="button" data-discard>Verwerfen</button>
-        <button class="btn btn--primary" type="button" data-save>Speichern</button>
+      <div class="savebar" data-savebar hidden>
+        <p><strong data-dirty-count>0</strong> Änderungen</p>
+        <div class="savebar__actions">
+          <button class="btn btn--ghost" type="button" data-discard>Verwerfen</button>
+          <button class="btn btn--primary" type="submit" data-save>Speichern</button>
+        </div>
       </div>
-    </div>`;
+    </form>`;
 }
 
 /* --------------------------------------------------------------------- news */

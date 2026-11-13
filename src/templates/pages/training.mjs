@@ -44,7 +44,7 @@ export function render(ctx) {
           <p class="eyebrow">${esc(page.firstSteps.eyebrow)}</p>
           <h2 class="split__title">${esc(page.firstSteps.title)}</h2>
           <p class="split__lead">${esc(page.firstSteps.lead)}</p>
-          <ol class="steps" role="list">${steps}</ol>
+          <ol class="steps">${steps}</ol>
         </div>
       </div>
     </section>

@@ -192,7 +192,7 @@ export function valuesSection(ctx, { tone = 'dark' } = {}) {
   return `<section class="section section--${tone}" id="values">
     <div class="shell">
       ${sectionHead({ eyebrow: t('values.eyebrow'), title: t('values.title'), lead: t('values.lead'), id: 'values-title' })}
-      <ol class="values" role="list">${list}</ol>
+      <ol class="values">${list}</ol>
     </div>
   </section>`;
 }
@@ -485,7 +485,7 @@ export function lightbox(ctx) {
       <button class="lightbox__close" type="button" data-lightbox-close>
         ${icon('close')}<span class="sr-only">${esc(t('ui.close'))}</span>
       </button>
-      <img class="lightbox__image" src="" alt="" data-lightbox-image>
+      <img class="lightbox__image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'/%3E" alt="" data-lightbox-image>
       <div class="lightbox__bar">
         <p class="lightbox__caption" data-lightbox-caption></p>
         <p class="lightbox__counter" data-lightbox-counter></p>

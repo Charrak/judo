@@ -156,9 +156,8 @@
       });
     }
 
-    if (saveButton) {
-      saveButton.addEventListener('click', function () {
-        var values = {};
+    function saveNow() {
+      var values = {};
         var invalid = null;
         fields.filter(isDirty).forEach(function (field) {
           var value = fieldValue(field).trim();
@@ -203,8 +202,20 @@
             setBusy(saveButton, false);
             toast('Netzwerkfehler – bitte erneut versuchen.', true);
           });
+    }
+
+    if (saveButton) {
+      // preventDefault keeps the native submit from firing twice
+      saveButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        saveNow();
       });
     }
+
+    editor.addEventListener('submit', function (event) {
+      event.preventDefault();
+      saveNow();
+    });
 
     window.addEventListener('beforeunload', function (event) {
       if (fields.some(isDirty)) {

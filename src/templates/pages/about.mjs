@@ -66,7 +66,7 @@ export function render(ctx) {
     <section class="section section--dark" id="goals">
       <div class="shell">
         ${sectionHead({ eyebrow: page.goals.eyebrow, title: page.goals.title, id: 'goals-title' })}
-        <ol class="goals" role="list">${goals}</ol>
+        <ol class="goals">${goals}</ol>
       </div>
     </section>
 
