@@ -1,0 +1,106 @@
+{
+  "defaultLanguage": "de",
+  "siteUrl": "https://www.atai-judo-academy.com",
+  "languages": [
+    {
+      "code": "de",
+      "locale": "de_DE",
+      "ogLocale": "de_DE",
+      "dir": "ltr",
+      "flag": "de",
+      "nativeName": "Deutsch",
+      "selfName": "Deutsch",
+      "contactLanguage": "Deutsch und Englisch",
+      "slugs": {
+        "home": "",
+        "about": "ueber-uns",
+        "training": "training",
+        "team": "team",
+        "gallery": "galerie",
+        "news": "aktuelles",
+        "contact": "kontakt",
+        "legal": "impressum"
+      }
+    },
+    {
+      "code": "en",
+      "locale": "en_AE",
+      "ogLocale": "en_GB",
+      "dir": "ltr",
+      "flag": "gb",
+      "nativeName": "English",
+      "selfName": "English",
+      "contactLanguage": "English and German",
+      "slugs": {
+        "home": "",
+        "about": "about",
+        "training": "training",
+        "team": "team",
+        "gallery": "gallery",
+        "news": "news",
+        "contact": "contact",
+        "legal": "legal"
+      }
+    },
+    {
+      "code": "ar",
+      "locale": "ar_AE",
+      "ogLocale": "ar_AE",
+      "dir": "rtl",
+      "flag": "sa",
+      "nativeName": "العربية",
+      "selfName": "العربية",
+      "contactLanguage": "العربية والإنجليزية",
+      "slugs": {
+        "home": "",
+        "about": "man-nahnu",
+        "training": "tadrib",
+        "team": "fariq",
+        "gallery": "suwar",
+        "news": "akhbar",
+        "contact": "ittisal",
+        "legal": "qanuni"
+      }
+    },
+    {
+      "code": "fr",
+      "locale": "fr_FR",
+      "ogLocale": "fr_FR",
+      "dir": "ltr",
+      "flag": "fr",
+      "nativeName": "Français",
+      "selfName": "Français",
+      "contactLanguage": "Français et anglais",
+      "slugs": {
+        "home": "",
+        "about": "a-propos",
+        "training": "entrainement",
+        "team": "equipe",
+        "gallery": "galerie",
+        "news": "actualites",
+        "contact": "contact",
+        "legal": "mentions-legales"
+      }
+    },
+    {
+      "code": "es",
+      "locale": "es_ES",
+      "ogLocale": "es_ES",
+      "dir": "ltr",
+      "flag": "es",
+      "nativeName": "Español",
+      "selfName": "Español",
+      "contactLanguage": "Español e inglés",
+      "slugs": {
+        "home": "",
+        "about": "sobre-nosotros",
+        "training": "entrenamiento",
+        "team": "equipo",
+        "gallery": "galeria",
+        "news": "noticias",
+        "contact": "contacto",
+        "legal": "aviso-legal"
+      }
+    }
+  ]
+}
