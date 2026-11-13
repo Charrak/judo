@@ -139,6 +139,27 @@ die Weiterleitung von HTTP auf HTTPS an und erneuert das Zertifikat automatisch
 (`systemctl list-timers | grep certbot`). Die Seite ist bis dahin über HTTP
 erreichbar – für die Verwaltung bitte erst nach dem Zertifikat nutzen.
 
+### Betrieb ohne Domain (nur über die IP)
+
+Solange es keine Domain gibt, nimmt das Skript auch die öffentliche IP als
+Argument – dann setzt es `server_name _;` und die Seite antwortet unter
+`http://<IP>/de/`:
+
+```bash
+sudo bash /srv/atai-judo/deploy/install.sh 92.5.155.209
+```
+
+Grenzen dieses Zwischenstands:
+
+- **Kein HTTPS.** Let's Encrypt stellt für reine IP-Adressen keine Zertifikate
+  aus. Der Admin-Bereich ist damit nur unverschlüsselt erreichbar – Passwort
+  erst setzen, wenn eine Domain mit Zertifikat steht.
+- Kanonische URLs, `hreflang` und `sitemap.xml` verweisen weiterhin auf
+  `siteUrl` aus `src/config/languages.json`. Für Suchmaschinen ist die IP-Variante
+  deshalb nicht gedacht.
+- Der Wechsel auf eine Domain ist ein einzelner Lauf mit Domain als Argument,
+  danach `certbot --nginx`.
+
 ### Admin-Zugang
 
 Beim ersten Start ohne `data/admin.json` gibt der Server einen **Einrichtungscode** aus:
