@@ -151,6 +151,37 @@ Diese Datei regelmäßig kopieren (z. B. per Cron auf ein zweites Volume).
    (Logo, Trainingszeiten, Bilder, Rechtstexte).
 3. Prüfen: `https://…/de/`, Sprachwechsel, Kontaktformular, `/admin/`, `/sitemap.xml`, `/robots.txt`.
 
+## Zugriff von Windows
+
+**IP-Adresse finden:** ☰ → *Compute* → *Instances* → Instanz `atai-judo` anklicken →
+Abschnitt **Instance access** bzw. **Primary VNIC** → **Public IPv4 address** (mit
+Kopiersymbol). Fehlt dort eine öffentliche IP, wurde die Instanz ohne sie angelegt:
+*Attached VNICs* → VNIC → *Assign public IP*.
+
+**Verbinden:**
+
+```powershell
+ssh -i "C:\Users\moniq\Downloads\fitshop\judo sshkey" ubuntu@130.61.x.x
+```
+
+Der Benutzername richtet sich nach dem Image: `ubuntu` (Ubuntu), `opc` (Oracle Linux).
+
+Auf Windows prüft OpenSSH die Dateirechte. Meldet es
+`Permissions for '…' are too open`, einmalig einschränken:
+
+```powershell
+icacls "C:\Users\moniq\Downloads\fitshop\judo sshkey" /inheritance:r
+icacls "C:\Users\moniq\Downloads\fitshop\judo sshkey" /grant:r "$env:USERNAME:R"
+```
+
+Weitere Stolpersteine:
+
+- Liegt der Schlüssel als `.ppk` vor (PuTTY), kann `ssh` ihn nicht lesen — in PuTTYgen
+  *Conversions → Export OpenSSH key* wählen.
+- `Permission denied (publickey)` heißt fast immer: falscher Benutzername oder ein
+  anderer Schlüssel als der, der bei der Instanz hinterlegt wurde.
+- Beim ersten Verbinden mit `yes` bestätigen.
+
 ## Häufige Fehlermeldungen beim Anlegen
 
 | Meldung | Ursache | Lösung |
