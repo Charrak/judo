@@ -48,13 +48,27 @@ Werbeblocker; das ist ein Darstellungsproblem der Konsole, kein Fehler deiner Ei
 
 ## 2. Instanz anlegen
 
-- **Image:** Ubuntu 24.04 (oder 22.04)
-- **Shape:** `VM.Standard.A1.Flex` (1 OCPU / 6 GB, Free Tier) oder `VM.Standard.E2.1.Micro`
-- **Public IPv4:** zuweisen
-- **SSH-Key:** eigenen öffentlichen Schlüssel hinterlegen
+Auf der Seite *Create instance* (Basic information):
 
-Danach im DNS deiner Domain zwei A-Records auf die öffentliche IP setzen:
-`atai-judo-academy.com` und `www.atai-judo-academy.com`.
+| Feld | Eintrag | Warum |
+| --- | --- | --- |
+| **Name** | `atai-judo` | frei wählbar |
+| **Compartment** | dein Compartment | z. B. „(root)" |
+| **Placement** | AD-1 | bei „Out of host capacity" AD-2 oder AD-3 versuchen |
+| **Image** | *Change image* → **Canonical Ubuntu 24.04** | die Befehle unten sind für Ubuntu geschrieben |
+| **Shape** | *Change shape* → **Ampere A1.Flex**, 1 OCPU / 6 GB | „Always Free eligible"; alternativ `VM.Standard.E2.1.Micro` (x86, langsamer) |
+| **Primary VNIC** | VCN `atai-judo-vcn`, Subnetz *public subnet* | aus Schritt 1 |
+| **Assign a public IPv4 address** | ✔ an | ohne öffentliche IP kein Zugriff und kein Zertifikat |
+| **Add SSH keys** | deinen **öffentlichen** Schlüssel einfügen | ohne Key kommt man nicht auf den Server |
+| **Boot volume** | Standard (50 GB) | im Free Tier bis 200 GB möglich |
+
+Die gelbe Warnung („You can create Ampere A1 compute instances in any availability
+domain … VM.Standard.E2.1.Micro … in AD-1") ist kein Fehler — sie sagt nur, welche
+Shapes wo verfügbar sind. A1.Flex ist überall möglich, also in AD-1, AD-2 oder AD-3.
+
+Nach *Create*: öffentliche IP notieren, im DNS zwei A-Records setzen
+(`atai-judo-academy.com` und `www.atai-judo-academy.com`), dann
+`ssh ubuntu@<öffentliche-ip>` und mit Schritt 3 weitermachen.
 
 ## 3. Server einrichten
 
@@ -132,6 +146,31 @@ Diese Datei regelmäßig kopieren (z. B. per Cron auf ein zweites Volume).
 2. Inhalte aus dem Abschnitt „Offene Punkte vor dem Livegang" im README ersetzen
    (Logo, Trainingszeiten, Bilder, Rechtstexte).
 3. Prüfen: `https://…/de/`, Sprachwechsel, Kontaktformular, `/admin/`, `/sitemap.xml`, `/robots.txt`.
+
+## Wenn du bei Oracle Linux 9 bleibst
+
+Die Anleitung oben nutzt `apt` (Ubuntu). Auf Oracle Linux 9 lauten die
+entsprechenden Befehle:
+
+```bash
+# Node 22, nginx, git, certbot (EPEL)
+curl -fsSL https://rpm.nodesource.com/setup_22.x | sudo bash -
+sudo dnf install -y nodejs nginx git
+sudo dnf install -y epel-release
+sudo dnf install -y certbot python3-certbot-nginx
+
+# SELinux erlaubt nginx sonst keine Verbindung zum Node-Prozess
+sudo setsebool -P httpd_can_network_connect 1
+
+# Benutzer und Ordner wie oben
+sudo useradd --system --create-home --shell /sbin/nologin atai
+sudo mkdir -p /srv/atai-judo && sudo chown atai:atai /srv/atai-judo
+sudo -u atai git clone https://github.com/Charrak/judo.git /srv/atai-judo
+```
+
+Der Rest (systemd-Unit, nginx-Konfiguration, `certbot --nginx`, Admin-Code,
+Sicherung) ist identisch. Der Benutzer in der Unit heißt weiterhin `atai`;
+der SSH-Login läuft bei Oracle Linux als `opc` statt `ubuntu`.
 
 ## Variante ohne Server
 
