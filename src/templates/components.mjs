@@ -60,7 +60,7 @@ export function siteHeader(ctx) {
   return `<header class="site-header" data-header>
     <div class="shell site-header__inner">
       <a class="brand" href="${esc(urlFor(ctx.lang, 'home'))}" aria-label="${esc(`${site.brand.name} ${site.brand.sub}`)}">
-        <img class="brand__mark" src="/assets/logo.svg" alt="" width="46" height="46" decoding="async">
+        <img class="brand__mark" src="/assets/logo-mark.webp" alt="" width="46" height="46" decoding="async">
         <span class="brand__text">
           <span class="brand__name">${esc(site.brand.name)}</span>
           <span class="brand__sub">${esc(site.brand.sub)}</span>
@@ -110,7 +110,7 @@ export function siteFooter(ctx) {
       <div class="footer__top">
         <div class="footer__brand">
           <a class="brand brand--footer" href="${esc(urlFor(lang, 'home'))}" aria-label="${esc(`${site.brand.name} ${site.brand.sub}`)}">
-            <img class="brand__mark" src="/assets/logo.svg" alt="" width="56" height="56" loading="lazy" decoding="async">
+            <img class="brand__mark" src="/assets/logo-mark.webp" alt="" width="56" height="56" loading="lazy" decoding="async">
             <span class="brand__text">
               <span class="brand__name">${esc(site.brand.name)}</span>
               <span class="brand__sub">${esc(site.brand.sub)}</span>
@@ -476,7 +476,7 @@ export function welcomeOverlay(ctx) {
   return `<div class="welcome" id="welcome-overlay">
     <div class="welcome__backdrop" aria-hidden="true"></div>
     <div class="welcome__panel" role="dialog" aria-modal="true" aria-labelledby="welcome-title" aria-describedby="welcome-subtitle">
-      <img class="welcome__logo" src="/assets/logo.svg" alt="" width="72" height="72">
+      <img class="welcome__logo" src="/assets/logo-mark.webp" alt="" width="96" height="96" decoding="async">
       <p class="welcome__brand">${esc(site.brand.name)} <span>${esc(site.brand.sub)}</span></p>
       <h2 class="welcome__title" id="welcome-title">${esc(t('welcome.title'))}</h2>
       <p class="welcome__subtitle" id="welcome-subtitle">${esc(t('welcome.subtitle'))}</p>

@@ -155,7 +155,7 @@ export function renderDocument(ctx, page, { bodyClass = '', noindex = false } = 
     <meta name="twitter:title" content="${esc(page.title)}">
     <meta name="twitter:description" content="${esc(page.description)}">
     <meta name="twitter:image" content="${esc(ogImage)}">
-    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/assets/favicon.png" type="image/png">
     <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
     <link rel="icon" href="/assets/icon-512.png" sizes="512x512" type="image/png">
     <link rel="stylesheet" href="/assets/styles.css">
@@ -218,7 +218,7 @@ export function renderRoot(ctx) {
     <meta property="og:title" content="${esc(title)}">
     <meta property="og:description" content="${esc(description)}">
     <meta property="og:image" content="${esc(config.siteUrl + '/assets/img/hero-dojo.jpg')}">
-    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/assets/favicon.png" type="image/png">
     <link rel="stylesheet" href="/assets/styles.css">
     <link rel="preload" href="/assets/fonts/outfit-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
     <script>
@@ -238,7 +238,7 @@ export function renderRoot(ctx) {
   <div class="welcome welcome--root">
     <div class="welcome__backdrop" aria-hidden="true"></div>
     <div class="welcome__panel" role="dialog" aria-modal="true" aria-labelledby="welcome-title" aria-describedby="welcome-subtitle">
-      <img class="welcome__logo" src="/assets/logo.svg" alt="" width="72" height="72">
+      <img class="welcome__logo" src="/assets/logo-mark.webp" alt="" width="96" height="96" decoding="async">
       <p class="welcome__brand">${esc(site.brand.name)} <span>${esc(site.brand.sub)}</span></p>
       <h1 class="welcome__title" id="welcome-title">${esc(t('welcome.title'))}</h1>
       <p class="welcome__subtitle" id="welcome-subtitle">${esc(t('welcome.subtitle'))}</p>
