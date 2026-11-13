@@ -125,11 +125,19 @@ sudo nginx -t && sudo systemctl reload nginx
 
 ### Zertifikat
 
+Die ausgelieferte nginx-Konfiguration hört bewusst **nur auf Port 80**. Ein
+`listen 443 ssl`-Block ohne vorhandenes Zertifikat lässt `nginx -t` mit
+`no "ssl_certificate" is defined` abbrechen – deshalb kommt TLS erst hier:
+
 ```bash
+# erst wenn der A-Record auf diesen Server zeigt
 sudo certbot --nginx -d atai-judo-academy.com -d www.atai-judo-academy.com
 ```
 
-Certbot trägt die Zertifikate ein und erneuert sie automatisch (`systemctl list-timers | grep certbot`).
+Certbot erweitert den Serverblock um 443, trägt die Zertifikatspfade ein, legt
+die Weiterleitung von HTTP auf HTTPS an und erneuert das Zertifikat automatisch
+(`systemctl list-timers | grep certbot`). Die Seite ist bis dahin über HTTP
+erreichbar – für die Verwaltung bitte erst nach dem Zertifikat nutzen.
 
 ### Admin-Zugang
 
@@ -214,6 +222,8 @@ Weitere Stolpersteine:
 | `Confidential compute incompatibilities` | Shielded/Confidential computing ist eingeschaltet, Ampere A1 unterstützt das nicht | Beide Schalter im Schritt *Security* aus lassen |
 | `Out of host capacity` | A1-Kapazität im gewählten AD erschöpft | Anderes AD, später erneut, oder `VM.Standard.E2.1.Micro` |
 | DNS-Label rot markiert | Mehr als 15 Zeichen | Kurzes Label wie `ataijudo` |
+| `fatal: detected dubious ownership in repository at '/srv/atai-judo'` | `git` läuft als `root`, das Verzeichnis gehört aber `atai` | Manuell: `git config --global --add safe.directory /srv/atai-judo` (das Skript führt git-Aufrufe inzwischen als `atai` aus) |
+| `DNS problem: NXDOMAIN looking up A for …` | Domain existiert nicht bzw. kein A-Record | Domain registrieren und A-Record für `@` und `www` auf die öffentliche IP setzen; Prüfen mit `dig +short <domain>` |
 | SSH-Login verweigert | Kein oder falscher Schlüssel hinterlegt | Instanz neu anlegen und den öffentlichen Schlüssel einfügen |
 
 ## Wenn du bei Oracle Linux 9 bleibst

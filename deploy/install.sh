@@ -39,14 +39,19 @@ log "Node $(node -v), nginx $(nginx -v 2>&1 | cut -d/ -f2)"
 log "Benutzer und Verzeichnis"
 id -u "$APP_USER" >/dev/null 2>&1 || useradd --system --create-home --shell /usr/sbin/nologin "$APP_USER"
 
+# Git im Projektverzeichnis immer als Dienstbenutzer ausführen: als root würde
+# git sonst mit "detected dubious ownership" abbrechen.
+git_app() { sudo -u "$APP_USER" git -C "$APP_DIR" "$@"; }
+
 if [[ -d "$APP_DIR/.git" ]]; then
   log "Vorhandene Installation aktualisieren"
-  git -C "$APP_DIR" fetch --quiet origin "$BRANCH"
-  git -C "$APP_DIR" reset --hard --quiet "origin/$BRANCH"
+  git_app fetch --quiet origin "$BRANCH"
+  git_app reset --hard --quiet "origin/$BRANCH"
 else
   log "Code holen nach $APP_DIR"
   mkdir -p "$APP_DIR"
   git clone --quiet --branch "$BRANCH" "$REPO" "$APP_DIR"
+  chown -R "$APP_USER:$APP_USER" "$APP_DIR"
 fi
 mkdir -p "$APP_DIR/data" "$APP_DIR/content"
 chown -R "$APP_USER:$APP_USER" "$APP_DIR"
@@ -66,7 +71,13 @@ sed -e "s#atai-judo-academy\.com#$DOMAIN#g" \
     "$APP_DIR/deploy/nginx-atai-judo.conf" > /etc/nginx/sites-available/atai-judo
 ln -sf /etc/nginx/sites-available/atai-judo /etc/nginx/sites-enabled/atai-judo
 rm -f /etc/nginx/sites-enabled/default
-nginx -t
+
+# Erst testen, dann übernehmen – bei einem Fehler bleibt der Server erreichbar.
+if ! nginx -t; then
+  rm -f /etc/nginx/sites-enabled/atai-judo
+  nginx -t >/dev/null 2>&1 && systemctl reload nginx || true
+  die "nginx-Konfiguration fehlerhaft (siehe Ausgabe oben). Die alte Konfiguration bleibt aktiv."
+fi
 systemctl reload nginx
 
 log "Warten, bis der Dienst antwortet"
@@ -84,8 +95,10 @@ Nächste Schritte:
 
 1. DNS: A-Records für $DOMAIN und www.$DOMAIN auf die öffentliche IP dieses Servers.
    Prüfen:   dig +short $DOMAIN
-2. Zertifikat, sobald DNS greift:
+2. Zertifikat, sobald DNS auf diesen Server zeigt (die Seite läuft bis dahin über HTTP):
    certbot --nginx -d $DOMAIN -d www.$DOMAIN
+   Certbot erweitert die nginx-Konfiguration um HTTPS und die Weiterleitung.
+   Prüfen danach:  curl -I https://www.$DOMAIN/de/
 3. Admin-Zugang einrichten (Code aus dem Log):
    journalctl -u atai-judo -n 30 | grep -i setup
    Danach https://www.$DOMAIN/admin/ öffnen.
