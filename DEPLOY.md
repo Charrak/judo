@@ -222,6 +222,28 @@ Weitere Stolpersteine:
   anderer Schlüssel als der, der bei der Instanz hinterlegt wurde.
 - Beim ersten Verbinden mit `yes` bestätigen.
 
+## Firewall: Security List *und* NSG
+
+Beim Anlegen über den Assistenten entsteht neben der Security List oft eine
+Network Security Group (`ig-quick-action-NSG`). **Beide** müssen den Verkehr
+erlauben – fehlt eine der beiden, kommt der Port nicht durch, während SSH
+weiter funktioniert.
+
+Prüfen auf der Instanz unter *Networking → Primary VNIC*:
+
+- **Network security groups** → NSG öffnen → *Add Rules*: Ingress, Source
+  `0.0.0.0/0`, TCP, Destination Port `80` und `443`
+- **Subnet** (`atai-judo-subnet`) anklicken → *Security Lists* → Standard-Liste →
+  *Add Ingress Rules* mit denselben Werten
+
+Schnelltest vom eigenen Rechner (Windows):
+
+```powershell
+Test-NetConnection -ComputerName 92.5.155.209 -Port 80
+```
+
+`TcpTestSucceeded : True` heißt: Port offen, dann liegt es nicht mehr an der Firewall.
+
 ## Häufige Fehlermeldungen beim Anlegen
 
 | Meldung | Ursache | Lösung |
