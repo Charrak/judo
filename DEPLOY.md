@@ -76,6 +76,22 @@ Nach *Create*: öffentliche IP notieren, im DNS zwei A-Records setzen
 
 ## 3. Server einrichten
 
+### Schnellweg: ein Skript
+
+Auf dem Server (nach dem SSH-Login) reicht ein Befehl – er installiert Node, nginx
+und certbot, holt den Code, baut die Seite und richtet Dienst und Proxy ein:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Charrak/judo/main/deploy/install.sh -o /tmp/install.sh
+sudo bash /tmp/install.sh atai-judo-academy.com
+```
+
+Das Skript ist wiederholbar (aktualisiert bestehende Installationen) und sagt am Ende,
+was noch fehlt: DNS, Zertifikat, Admin-Passwort. Wer lieber jeden Schritt selbst macht,
+folgt den Abschnitten darunter.
+
+### Einzelschritte
+
 ```bash
 ssh ubuntu@<öffentliche-ip>
 
