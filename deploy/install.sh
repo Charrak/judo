@@ -39,14 +39,19 @@ log "Node $(node -v), nginx $(nginx -v 2>&1 | cut -d/ -f2)"
 log "Benutzer und Verzeichnis"
 id -u "$APP_USER" >/dev/null 2>&1 || useradd --system --create-home --shell /usr/sbin/nologin "$APP_USER"
 
+# Git im Projektverzeichnis immer als Dienstbenutzer ausführen: als root würde
+# git sonst mit "detected dubious ownership" abbrechen.
+git_app() { sudo -u "$APP_USER" git -C "$APP_DIR" "$@"; }
+
 if [[ -d "$APP_DIR/.git" ]]; then
   log "Vorhandene Installation aktualisieren"
-  git -C "$APP_DIR" fetch --quiet origin "$BRANCH"
-  git -C "$APP_DIR" reset --hard --quiet "origin/$BRANCH"
+  git_app fetch --quiet origin "$BRANCH"
+  git_app reset --hard --quiet "origin/$BRANCH"
 else
   log "Code holen nach $APP_DIR"
   mkdir -p "$APP_DIR"
   git clone --quiet --branch "$BRANCH" "$REPO" "$APP_DIR"
+  chown -R "$APP_USER:$APP_USER" "$APP_DIR"
 fi
 mkdir -p "$APP_DIR/data" "$APP_DIR/content"
 chown -R "$APP_USER:$APP_USER" "$APP_DIR"

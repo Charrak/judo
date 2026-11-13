@@ -222,6 +222,8 @@ Weitere Stolpersteine:
 | `Confidential compute incompatibilities` | Shielded/Confidential computing ist eingeschaltet, Ampere A1 unterstützt das nicht | Beide Schalter im Schritt *Security* aus lassen |
 | `Out of host capacity` | A1-Kapazität im gewählten AD erschöpft | Anderes AD, später erneut, oder `VM.Standard.E2.1.Micro` |
 | DNS-Label rot markiert | Mehr als 15 Zeichen | Kurzes Label wie `ataijudo` |
+| `fatal: detected dubious ownership in repository at '/srv/atai-judo'` | `git` läuft als `root`, das Verzeichnis gehört aber `atai` | Manuell: `git config --global --add safe.directory /srv/atai-judo` (das Skript führt git-Aufrufe inzwischen als `atai` aus) |
+| `DNS problem: NXDOMAIN looking up A for …` | Domain existiert nicht bzw. kein A-Record | Domain registrieren und A-Record für `@` und `www` auf die öffentliche IP setzen; Prüfen mit `dig +short <domain>` |
 | SSH-Login verweigert | Kein oder falscher Schlüssel hinterlegt | Instanz neu anlegen und den öffentlichen Schlüssel einfügen |
 
 ## Wenn du bei Oracle Linux 9 bleibst
