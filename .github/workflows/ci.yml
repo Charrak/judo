@@ -1,0 +1,35 @@
+# Prüft Übersetzungen, baut die Seite und lässt die Testsuite laufen.
+# Das Projekt hat keine Laufzeit-Abhängigkeiten – es wird nichts installiert.
+
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Check translations
+        run: npm run check:i18n
+
+      - name: Build site
+        run: npm run build
+
+      - name: Run tests
+        run: npm test

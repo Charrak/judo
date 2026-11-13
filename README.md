@@ -14,6 +14,7 @@ Texte und Inhalte lassen sich ohne Codekenntnisse im geschützten Bereich unter 
 npm run build      # erzeugt dist/ (47 HTML-Seiten, Sitemap, robots.txt)
 npm start          # baut und startet Server + Admin unter http://localhost:3000
 npm run check:i18n # prüft, ob alle fünf Sprachdateien vollständig und synchron sind
+npm test           # Testlauf (Sprachdateien, gebaute Seiten, Helfer)
 ```
 
 Es gibt **keine Laufzeit-Abhängigkeiten** – nur Node.js ≥ 20. Kein Framework, kein Build-Tool außer dem eigenen Generator.
@@ -199,6 +200,23 @@ Den Code kann man mit `ADMIN_SETUP_TOKEN=… npm start` selbst vorgeben. Passwor
 - Passwort als scrypt-Hash in `data/admin.json` (nicht versioniert), Sitzungen serverseitig mit 12 Stunden Laufzeit, `HttpOnly` und `SameSite=Strict`.
 - Jede schreibende Anfrage braucht das CSRF-Token der Sitzung; zusätzlich werden `Origin` geprüft, Login-Versuche begrenzt (6 pro 15 Minuten) und Uploads anhand ihrer Dateisignatur validiert.
 - Der Bereich ist über `robots.txt` gesperrt und sendet `X-Robots-Tag: noindex`.
+
+---
+
+## Prüfungen & CI
+
+Jeder Push auf `main` und jeder Pull Request laufen durch `.github/workflows/ci.yml`:
+
+1. `npm run check:i18n` – alle fünf Sprachdateien haben denselben Schlüsselsatz, keine leeren Werte, keine deutschen Reste.
+2. `npm run build` – die Seite wird vollständig gebaut.
+3. `npm test` – `node --test` prüft zusätzlich:
+   - Platzhalter (`{name}`) stimmen zwischen Deutsch und den Übersetzungen überein,
+   - Sprachkennungen, Richtungen (`ar` = RTL), Flaggen und Slugs sind vollständig,
+   - jede gebaute Seite trägt `lang`, `dir`, Canonical, `hreflang` für alle fünf Sprachen und `x-default`,
+   - `robots.txt` sperrt `/admin/`, die Sitemap nennt alle Sprachfassungen,
+   - im Build landen keine Verwaltungsdateien.
+
+Die Tests brauchen keine Abhängigkeiten (`node:test`) und laufen in unter einer Sekunde.
 
 ---
 

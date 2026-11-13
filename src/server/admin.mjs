@@ -186,10 +186,6 @@ function sameOrigin(req) {
   }
 }
 
-function naturalCompare(a, b) {
-  return a.localeCompare(b, 'de', { numeric: true, sensitivity: 'base' });
-}
-
 function safeEqual(a, b) {
   const left = Buffer.from(String(a));
   const right = Buffer.from(String(b));
@@ -357,7 +353,7 @@ export function createAdmin({ rootDir, config, site, rebuild }) {
       .join(' › ');
   }
 
-  function handleTextsPage(req, res, url, session) {
+  function handleTextsPage(res, url, session) {
     const requested = url.searchParams.get('lang');
     const lang = config.languages.some((language) => language.code === requested)
       ? requested
@@ -408,7 +404,7 @@ export function createAdmin({ rootDir, config, site, rebuild }) {
       }
       const value = String(rawValue)
         .replace(/\r\n?/g, '\n')
-        .replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, '')
+        .replace(/[^\P{Cc}\t\n\r]/gu, '')
         .trim();
       if (!value) {
         sendJson(res, 400, { ok: false, error: `Das Feld "${key}" darf nicht leer sein.` });
@@ -474,7 +470,7 @@ export function createAdmin({ rootDir, config, site, rebuild }) {
     });
   }
 
-  async function saveNews(res, payload) {
+  function saveNews(res, payload) {
     const items = loadNews(rootDir);
     const existing = items.find((item) => item.id === payload.id);
     const translations = {};
@@ -557,7 +553,7 @@ export function createAdmin({ rootDir, config, site, rebuild }) {
 
   /* ---------------------------------------------------------------- gallery */
 
-  async function saveGallery(res, body) {
+  function saveGallery(res, body) {
     if (!Array.isArray(body.items)) {
       sendJson(res, 400, { ok: false, error: 'Ungültige Galerie-Daten.' });
       return;
@@ -846,11 +842,11 @@ export function createAdmin({ rootDir, config, site, rebuild }) {
         if (urlPath === '/api/admin/news') {
           const body = await readJsonBody(req);
           if (body.action === 'delete') deleteNews(res, String(body.id ?? ''));
-          else await saveNews(res, body.entry ?? {});
+          else saveNews(res, body.entry ?? {});
           return true;
         }
         if (urlPath === '/api/admin/gallery') {
-          await saveGallery(res, await readJsonBody(req));
+          saveGallery(res, await readJsonBody(req));
           return true;
         }
         if (urlPath === '/api/admin/upload') {
@@ -866,7 +862,7 @@ export function createAdmin({ rootDir, config, site, rebuild }) {
       }
 
       if (urlPath === '/admin/texte') {
-        handleTextsPage(req, res, url, session);
+        handleTextsPage(res, url, session);
         return true;
       }
       if (urlPath === '/admin/neuigkeiten' || urlPath === '/admin/neuigkeiten/') {

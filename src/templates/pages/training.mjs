@@ -2,7 +2,7 @@ import { esc } from '../../lib/html.mjs';
 import { ctaBand, faqSection, pageHero, programsSection, scheduleSection } from '../components.mjs';
 
 export function render(ctx) {
-  const { t, raw, image } = ctx;
+  const { raw, image } = ctx;
   const page = raw('pages.training');
   const stepsImage = image('randori');
 

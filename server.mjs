@@ -75,7 +75,7 @@ function safePath(urlPath) {
   return resolved;
 }
 
-async function readBody(req) {
+function readBody(req) {
   return new Promise((resolve, reject) => {
     let size = 0;
     const chunks = [];
@@ -211,7 +211,7 @@ async function serveFile(res, filePath, status = 200, req = null) {
       return;
     }
     fs.createReadStream(filePath).pipe(res);
-  } catch (error) {
+  } catch {
     res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
     res.end('Not found');
   }

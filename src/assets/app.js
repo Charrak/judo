@@ -13,7 +13,7 @@
     try {
       localStorage.setItem((data && data.storageKey) || 'atai.lang', code);
       sessionStorage.setItem((data && data.switchFlag) || 'atai.switch', '1');
-    } catch (error) {
+    } catch {
       /* storage can be unavailable in private modes – navigation still works */
     }
   }
@@ -107,7 +107,9 @@
     var stored = null;
     try {
       stored = localStorage.getItem((data && data.storageKey) || 'atai.lang');
-    } catch (error) {}
+    } catch {
+      /* storage may be unavailable – treat as "nothing stored" */
+    }
     if (stored) html.removeAttribute('data-entry');
   });
 
