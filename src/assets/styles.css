@@ -2724,6 +2724,39 @@ html[lang='ar'] .philosophy__quote {
     margin-inline-start: auto;
   }
 
+  /* Without JavaScript the header must stay usable: static bar with inline links. */
+  html.no-js .site-header {
+    position: static;
+    background: rgba(6, 14, 22, 0.98);
+  }
+
+  html.no-js .nav {
+    position: static;
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    background: none;
+    padding: 0;
+    margin-block-start: 0.9rem;
+    z-index: auto;
+  }
+
+  html.no-js .nav__list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.1rem;
+  }
+
+  html.no-js .nav__link {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+  }
+
+  html.no-js .nav__extra,
+  html.no-js .menu-toggle {
+    display: none;
+  }
+
   .hero {
     min-height: auto;
     padding-block: calc(var(--header-h) + 80px) 56px;

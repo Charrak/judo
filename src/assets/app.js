@@ -209,7 +209,8 @@
     }
 
     galleryItems.forEach(function (item) {
-      item.addEventListener('click', function () {
+      item.addEventListener('click', function (event) {
+        event.preventDefault();
         openLightbox(Number(item.getAttribute('data-index')) || 0, item);
       });
     });

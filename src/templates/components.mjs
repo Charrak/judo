@@ -307,10 +307,10 @@ export function galleryGrid(ctx, { keys, lightbox = false, tone = 'dark' } = {})
         return `<figure class="tile reveal">${inner}</figure>`;
       }
       return `<li class="tile reveal">
-        <button class="tile__button" type="button" data-gallery-item data-index="${index}"
+        <a class="tile__button" href="${esc(image.src)}" data-gallery-item data-index="${index}"
           data-src="${esc(image.src)}" data-caption="${esc(caption)}" data-width="${image.width}" data-height="${image.height}">
           ${inner}
-        </button>
+        </a>
       </li>`;
     })
     .join('');
