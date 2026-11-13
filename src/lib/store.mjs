@@ -220,7 +220,8 @@ export function normalizeGalleryItem(item, config) {
     width: Number(item.width) || 0,
     height: Number(item.height) || 0,
     captions,
-    uploaded: Boolean(item.uploaded),
+    // files below /assets/uploads/ are always files the operator uploaded
+    uploaded: Boolean(item.uploaded) || item.src.startsWith('/assets/uploads/'),
   };
 }
 
