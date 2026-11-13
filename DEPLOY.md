@@ -125,11 +125,19 @@ sudo nginx -t && sudo systemctl reload nginx
 
 ### Zertifikat
 
+Die ausgelieferte nginx-Konfiguration hört bewusst **nur auf Port 80**. Ein
+`listen 443 ssl`-Block ohne vorhandenes Zertifikat lässt `nginx -t` mit
+`no "ssl_certificate" is defined` abbrechen – deshalb kommt TLS erst hier:
+
 ```bash
+# erst wenn der A-Record auf diesen Server zeigt
 sudo certbot --nginx -d atai-judo-academy.com -d www.atai-judo-academy.com
 ```
 
-Certbot trägt die Zertifikate ein und erneuert sie automatisch (`systemctl list-timers | grep certbot`).
+Certbot erweitert den Serverblock um 443, trägt die Zertifikatspfade ein, legt
+die Weiterleitung von HTTP auf HTTPS an und erneuert das Zertifikat automatisch
+(`systemctl list-timers | grep certbot`). Die Seite ist bis dahin über HTTP
+erreichbar – für die Verwaltung bitte erst nach dem Zertifikat nutzen.
 
 ### Admin-Zugang
 

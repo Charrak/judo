@@ -66,7 +66,13 @@ sed -e "s#atai-judo-academy\.com#$DOMAIN#g" \
     "$APP_DIR/deploy/nginx-atai-judo.conf" > /etc/nginx/sites-available/atai-judo
 ln -sf /etc/nginx/sites-available/atai-judo /etc/nginx/sites-enabled/atai-judo
 rm -f /etc/nginx/sites-enabled/default
-nginx -t
+
+# Erst testen, dann übernehmen – bei einem Fehler bleibt der Server erreichbar.
+if ! nginx -t; then
+  rm -f /etc/nginx/sites-enabled/atai-judo
+  nginx -t >/dev/null 2>&1 && systemctl reload nginx || true
+  die "nginx-Konfiguration fehlerhaft (siehe Ausgabe oben). Die alte Konfiguration bleibt aktiv."
+fi
 systemctl reload nginx
 
 log "Warten, bis der Dienst antwortet"
@@ -84,8 +90,10 @@ Nächste Schritte:
 
 1. DNS: A-Records für $DOMAIN und www.$DOMAIN auf die öffentliche IP dieses Servers.
    Prüfen:   dig +short $DOMAIN
-2. Zertifikat, sobald DNS greift:
+2. Zertifikat, sobald DNS auf diesen Server zeigt (die Seite läuft bis dahin über HTTP):
    certbot --nginx -d $DOMAIN -d www.$DOMAIN
+   Certbot erweitert die nginx-Konfiguration um HTTPS und die Weiterleitung.
+   Prüfen danach:  curl -I https://www.$DOMAIN/de/
 3. Admin-Zugang einrichten (Code aus dem Log):
    journalctl -u atai-judo -n 30 | grep -i setup
    Danach https://www.$DOMAIN/admin/ öffnen.
