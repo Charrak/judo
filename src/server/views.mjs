@@ -53,6 +53,7 @@ export function layout({ title, active = '', body, session, counts = {}, flash =
       </div>
     </div>
   </header>
+  <noscript><p class="noscript">Zum Bearbeiten von Texten, Beiträgen und Bildern wird JavaScript benötigt. Die Anmeldung funktioniert auch ohne.</p></noscript>
   <main class="wrap">${body}</main>
   <div class="toast" data-toast role="status" aria-live="polite"></div>
 </body>
