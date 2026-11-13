@@ -11,6 +11,7 @@
     "training": "Training",
     "team": "Team",
     "gallery": "Gallery",
+    "news": "News",
     "contact": "Contact",
     "legal": "Legal notice"
   },
@@ -575,6 +576,20 @@
           }
         ]
       }
+    }
+  },
+  "news": {
+    "eyebrow": "From the academy",
+    "title": "News",
+    "lead": "Tournaments, belt gradings, new training times: here you can read what is happening at our academy right now.",
+    "empty": "The first posts are being written. Check back soon or follow us on Instagram.",
+    "readMore": "Read more",
+    "back": "All news",
+    "all": "More posts",
+    "published": "Published on {date}",
+    "meta": {
+      "title": "News from the ATAI JUDO ACADEMY",
+      "description": "Current reports, tournament results and notices from the ATAI JUDO ACADEMY in Abu Dhabi."
     }
   },
   "notFound": {

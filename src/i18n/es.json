@@ -11,6 +11,7 @@
     "training": "Entrenamiento",
     "team": "Equipo",
     "gallery": "Galería",
+    "news": "Actualidad",
     "contact": "Contacto",
     "legal": "Aviso legal"
   },
@@ -575,6 +576,20 @@
           }
         ]
       }
+    }
+  },
+  "news": {
+    "eyebrow": "Desde la academia",
+    "title": "Noticias",
+    "lead": "Torneos, exámenes de cinturón y nuevos horarios: aquí puedes leer lo que ocurre ahora en nuestra academia.",
+    "empty": "Los primeros artículos están en camino. Vuelve pronto o síguenos en Instagram.",
+    "readMore": "Leer más",
+    "back": "Todas las noticias",
+    "all": "Más artículos",
+    "published": "Publicado el {date}",
+    "meta": {
+      "title": "Noticias de la ATAI JUDO ACADEMY",
+      "description": "Crónicas, resultados de torneos y avisos de la ATAI JUDO ACADEMY en Abu Dabi."
     }
   },
   "notFound": {

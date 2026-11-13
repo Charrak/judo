@@ -11,6 +11,7 @@
     "training": "Entraînement",
     "team": "Équipe",
     "gallery": "Galerie",
+    "news": "Actualités",
     "contact": "Contact",
     "legal": "Mentions légales"
   },
@@ -575,6 +576,20 @@
           }
         ]
       }
+    }
+  },
+  "news": {
+    "eyebrow": "De l'académie",
+    "title": "Actualités",
+    "lead": "Tournois, passages de ceinture, nouveaux horaires : retrouvez ici ce qui se passe actuellement dans notre académie.",
+    "empty": "Les premiers articles arrivent. Revenez bientôt ou suivez-nous sur Instagram.",
+    "readMore": "Lire la suite",
+    "back": "Toutes les actualités",
+    "all": "Plus d'articles",
+    "published": "Publié le {date}",
+    "meta": {
+      "title": "Les actualités de l'ATAI JUDO ACADEMY",
+      "description": "Comptes rendus, résultats de tournois et informations de l'ATAI JUDO ACADEMY à Abou Dabi."
     }
   },
   "notFound": {

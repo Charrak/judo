@@ -6,16 +6,30 @@
  *  • resolves the localized 404 page from the URL prefix
  *  • accepts contact requests via POST /api/contact (JSON or form encoded)
  */
+import crypto from 'node:crypto';
 import http from 'node:http';
 import fs from 'node:fs';
 import fsp from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { createAdmin } from './src/server/admin.mjs';
+import { makeRebuilder } from './src/server/rebuild.mjs';
+
 const rootDir = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.join(rootDir, 'dist');
 const dataDir = path.join(rootDir, 'data');
 const messagesFile = path.join(dataDir, 'contact-messages.jsonl');
+
+const languagesConfig = JSON.parse(fs.readFileSync(path.join(rootDir, 'src/config/languages.json'), 'utf8'));
+const siteConfig = JSON.parse(fs.readFileSync(path.join(rootDir, 'src/config/site.json'), 'utf8'));
+
+const admin = createAdmin({
+  rootDir,
+  config: languagesConfig,
+  site: siteConfig,
+  rebuild: makeRebuilder(rootDir),
+});
 
 const PORT = Number(process.env.PORT) || 3000;
 const HOST = process.env.HOST || '0.0.0.0';
@@ -163,7 +177,7 @@ async function handleContact(req, res) {
     await fsp.mkdir(dataDir, { recursive: true });
     await fsp.appendFile(
       messagesFile,
-      `${JSON.stringify({ ...record, receivedAt: new Date().toISOString() })}\n`,
+      `${JSON.stringify({ ...record, id: crypto.randomUUID(), receivedAt: new Date().toISOString() })}\n`,
       'utf8',
     );
   } catch (error) {
@@ -230,6 +244,11 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  if (urlPath === '/admin' || urlPath.startsWith('/admin/') || urlPath.startsWith('/api/admin/')) {
+    await admin.handle(req, res, urlPath);
+    return;
+  }
+
   if (req.method !== 'GET' && req.method !== 'HEAD') {
     res.writeHead(405, { Allow: 'GET, HEAD', 'Content-Type': 'text/plain; charset=utf-8' });
     res.end('Method not allowed');
@@ -284,6 +303,12 @@ if (!fs.existsSync(path.join(distDir, 'index.html'))) {
 server.listen(PORT, HOST, () => {
   console.log(`ATAI JUDO ACADEMY running on http://${HOST}:${PORT}`);
   console.log(`Languages: /de/ /en/ /ar/ /fr/ /es/`);
+  if (admin.auth.hasPassword()) {
+    console.log(`Admin:      /admin/ (Passwort gesetzt)`);
+  } else {
+    console.log(`Admin:      /admin/ — noch kein Passwort`);
+    console.log(`Setup-Code: ${admin.auth.setupCode}`);
+  }
 });
 
 for (const signal of ['SIGINT', 'SIGTERM']) {

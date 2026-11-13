@@ -17,6 +17,7 @@
         "training": "training",
         "team": "team",
         "gallery": "galerie",
+        "news": "aktuelles",
         "contact": "kontakt",
         "legal": "impressum"
       }
@@ -36,6 +37,7 @@
         "training": "training",
         "team": "team",
         "gallery": "gallery",
+        "news": "news",
         "contact": "contact",
         "legal": "legal"
       }
@@ -55,6 +57,7 @@
         "training": "tadrib",
         "team": "fariq",
         "gallery": "suwar",
+        "news": "akhbar",
         "contact": "ittisal",
         "legal": "qanuni"
       }
@@ -74,6 +77,7 @@
         "training": "entrainement",
         "team": "equipe",
         "gallery": "galerie",
+        "news": "actualites",
         "contact": "contact",
         "legal": "mentions-legales"
       }
@@ -93,6 +97,7 @@
         "training": "entrenamiento",
         "team": "equipo",
         "gallery": "galeria",
+        "news": "noticias",
         "contact": "contacto",
         "legal": "aviso-legal"
       }

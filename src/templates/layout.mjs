@@ -33,7 +33,7 @@ function headScript(ctx, urls) {
 
 export function renderClientData(ctx) {
   const { t, lang, language, config, route, languages } = ctx;
-  const urls = Object.fromEntries(languages.map((entry) => [entry.code, urlFor(config, entry.code, route)]));
+  const urls = Object.fromEntries(languages.map((entry) => [entry.code, ctx.pageUrl(entry.code)]));
   const homes = Object.fromEntries(languages.map((entry) => [entry.code, urlFor(config, entry.code, 'home')]));
 
   return {
@@ -77,14 +77,18 @@ export function renderClientData(ctx) {
 
 export function renderDocument(ctx, page, { bodyClass = '', noindex = false } = {}) {
   const { t, lang, language, config, route, site } = ctx;
-  const canonical = localeUrl(config, lang, route);
+  const canonical = config.siteUrl.replace(/\/$/, '') + ctx.pageUrl(lang);
   const alternates = config.languages.map((entry) => ({
     code: entry.code,
     htmlLang: entry.code,
-    href: localeUrl(config, entry.code, route),
+    href: config.siteUrl.replace(/\/$/, '') + ctx.pageUrl(entry.code),
     nativeName: entry.nativeName,
   }));
-  const ogImage = config.siteUrl + ctx.image(page.ogImage ?? 'hero').src;
+  const ogSource =
+    typeof page.ogImage === 'string' && page.ogImage.startsWith('/')
+      ? page.ogImage
+      : ctx.image(page.ogImage || 'hero').src;
+  const ogImage = config.siteUrl.replace(/\/$/, '') + ogSource;
   const clientData = renderClientData(ctx);
   const arabic = lang === 'ar';
   const fontPreload = arabic
@@ -135,7 +139,7 @@ export function renderDocument(ctx, page, { bodyClass = '', noindex = false } = 
     <meta name="description" content="${esc(page.description)}">
     <link rel="canonical" href="${esc(canonical)}">
     ${hreflang}
-    <link rel="alternate" hreflang="x-default" href="${esc(localeUrl(config, config.defaultLanguage, route))}">
+    <link rel="alternate" hreflang="x-default" href="${esc(config.siteUrl.replace(/\/$/, '') + ctx.pageUrl(config.defaultLanguage))}">
     <meta name="robots" content="${noindex ? 'noindex, follow' : 'index, follow'}">
     <meta name="theme-color" content="#081320">
     <meta property="og:type" content="website">

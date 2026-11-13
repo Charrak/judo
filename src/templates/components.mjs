@@ -14,7 +14,7 @@ export function languageMenu(ctx) {
     .map((language) => {
       const isActive = language.code === lang;
       return `<li>
-        <a class="lang-menu__link${isActive ? ' is-active' : ''}" href="${esc(urlFor(language.code, route))}"
+        <a class="lang-menu__link${isActive ? ' is-active' : ''}" href="${esc(ctx.pageUrl(language.code))}"
            hreflang="${esc(language.code)}" lang="${esc(language.code)}" dir="${esc(language.dir)}"
            data-lang-switch="${esc(language.code)}"${isActive ? ' aria-current="true"' : ''}>
           <img class="lang-menu__flag" src="/assets/flags/${esc(language.flag)}.svg" alt="" width="26" height="20" loading="lazy">
@@ -41,7 +41,8 @@ export function languageMenu(ctx) {
 
 export function siteHeader(ctx) {
   const { t, route, urlFor, site } = ctx;
-  const links = NAV_ROUTES.map((key) => {
+  const routes = ctx.hasNews ? ['home', 'about', 'training', 'news', 'team', 'gallery', 'contact'] : NAV_ROUTES;
+  const links = routes.map((key) => {
     const isActive = route === key;
     return `<li><a class="nav__link${isActive ? ' is-active' : ''}" href="${esc(urlFor(ctx.lang, key))}"${
       isActive ? ' aria-current="page"' : ''
@@ -80,7 +81,8 @@ export function siteHeader(ctx) {
 
 export function siteFooter(ctx) {
   const { t, lang, route, urlFor, site, year, languages } = ctx;
-  const navLinks = NAV_ROUTES.map(
+  const navRoutes = ctx.hasNews ? ['home', 'about', 'training', 'news', 'team', 'gallery', 'contact'] : NAV_ROUTES;
+  const navLinks = navRoutes.map(
     (key) =>
       `<li><a class="footer__link" href="${esc(urlFor(lang, key))}">${esc(t(`nav.${key}`))}</a></li>`,
   ).join('');
@@ -88,7 +90,7 @@ export function siteFooter(ctx) {
   const langLinks = languages
     .map(
       (language) => `<li><a class="footer__lang${language.code === lang ? ' is-active' : ''}"
-        href="${esc(urlFor(language.code, route))}" hreflang="${esc(language.code)}" lang="${esc(language.code)}"
+        href="${esc(ctx.pageUrl(language.code))}" hreflang="${esc(language.code)}" lang="${esc(language.code)}"
         data-lang-switch="${esc(language.code)}"${language.code === lang ? ' aria-current="true"' : ''}>
         <img class="footer__flag" src="/assets/flags/${esc(language.flag)}.svg" alt="" width="22" height="17" loading="lazy">
         <span>${esc(language.nativeName)}</span></a></li>`,
@@ -147,8 +149,8 @@ export function siteFooter(ctx) {
   </footer>`;
 }
 
-export function pageHero(ctx, { eyebrow, title, lead, imageKey, priority = false }) {
-  const image = ctx.image(imageKey);
+export function pageHero(ctx, { eyebrow, title, lead, imageKey, imageSrc = null, priority = false }) {
+  const image = imageSrc ? { src: imageSrc, width: 1200, height: 800 } : ctx.image(imageKey);
   return `<section class="page-hero">
     <div class="shell page-hero__inner">
       <div class="page-hero__text">
@@ -296,19 +298,29 @@ export function scheduleSection(ctx, { tone = 'dark' } = {}) {
   </section>`;
 }
 
-export function galleryGrid(ctx, { keys, lightbox = false, tone = 'dark' } = {}) {
-  const items = keys
-    .map((key, index) => {
+export function galleryGrid(ctx, { keys = null, items = null, lightbox = false } = {}) {
+  const entries =
+    items ??
+    keys.map((key) => {
       const image = ctx.image(key);
-      const caption = ctx.t(`pages.gallery.captions.${key}`);
-      const inner = `<img src="${esc(image.src)}" alt="${esc(caption)}" width="${image.width}" height="${image.height}" loading="lazy" decoding="async">
-        <span class="tile__caption">${esc(caption)}</span>`;
+      return {
+        src: image.src,
+        width: image.width,
+        height: image.height,
+        caption: ctx.t(`pages.gallery.captions.${key}`),
+      };
+    });
+
+  const markup = entries
+    .map((entry, index) => {
+      const inner = `<img src="${esc(entry.src)}" alt="${esc(entry.caption)}" width="${entry.width}" height="${entry.height}" loading="lazy" decoding="async">
+        <span class="tile__caption">${esc(entry.caption)}</span>`;
       if (!lightbox) {
         return `<figure class="tile reveal">${inner}</figure>`;
       }
       return `<li class="tile reveal">
-        <a class="tile__button" href="${esc(image.src)}" data-gallery-item data-index="${index}"
-          data-src="${esc(image.src)}" data-caption="${esc(caption)}" data-width="${image.width}" data-height="${image.height}">
+        <a class="tile__button" href="${esc(entry.src)}" data-gallery-item data-index="${index}"
+          data-src="${esc(entry.src)}" data-caption="${esc(entry.caption)}" data-width="${entry.width}" data-height="${entry.height}">
           ${inner}
         </a>
       </li>`;
@@ -316,9 +328,9 @@ export function galleryGrid(ctx, { keys, lightbox = false, tone = 'dark' } = {})
     .join('');
 
   if (lightbox) {
-    return `<ul class="gallery" role="list" data-gallery>${items}</ul>`;
+    return `<ul class="gallery" role="list" data-gallery>${markup}</ul>`;
   }
-  return `<div class="gallery gallery--static">${items}</div>`;
+  return `<div class="gallery gallery--static">${markup}</div>`;
 }
 
 export function ctaBand(ctx, pageKey = 'home') {
@@ -442,7 +454,7 @@ export function welcomeOverlay(ctx, { always = false } = {}) {
   const choices = languages
     .map(
       (language) => `<li>
-        <a class="welcome__choice" href="${esc(urlFor(language.code, ctx.route))}"
+        <a class="welcome__choice" href="${esc(ctx.pageUrl(language.code))}"
            hreflang="${esc(language.code)}" lang="${esc(language.code)}" dir="${esc(language.dir)}"
            data-lang-switch="${esc(language.code)}">
           <img class="welcome__flag" src="/assets/flags/${esc(language.flag)}.svg" alt="" width="40" height="30">

@@ -11,6 +11,7 @@
     "training": "Training",
     "team": "Team",
     "gallery": "Galerie",
+    "news": "Aktuelles",
     "contact": "Kontakt",
     "legal": "Impressum"
   },
@@ -575,6 +576,20 @@
           }
         ]
       }
+    }
+  },
+  "news": {
+    "eyebrow": "Aus der Akademie",
+    "title": "Neuigkeiten",
+    "lead": "Turniere, Gürtelprüfungen, neue Trainingszeiten: Hier erfahrt ihr, was bei uns gerade passiert.",
+    "empty": "Hier entstehen gerade die ersten Beiträge. Schaut bald wieder vorbei oder folgt uns auf Instagram.",
+    "readMore": "Weiterlesen",
+    "back": "Alle Neuigkeiten",
+    "all": "Weitere Beiträge",
+    "published": "Veröffentlicht am {date}",
+    "meta": {
+      "title": "Neuigkeiten aus der ATAI JUDO ACADEMY",
+      "description": "Aktuelle Berichte, Turnierergebnisse und Hinweise aus der ATAI JUDO ACADEMY in Abu Dhabi."
     }
   },
   "notFound": {
