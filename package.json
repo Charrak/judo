@@ -1,0 +1,17 @@
+{
+  "name": "atai-judo-academy",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Multilingual website of the ATAI JUDO ACADEMY in Abu Dhabi (de, en, ar, fr, es).",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "start": "node scripts/build.mjs && node server.mjs",
+    "serve": "node server.mjs",
+    "dev": "node scripts/build.mjs && node server.mjs",
+    "check:i18n": "node scripts/check-i18n.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

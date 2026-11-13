@@ -1,0 +1,50 @@
+{
+  "brand": {
+    "name": "ATAI",
+    "sub": "JUDO ACADEMY"
+  },
+  "founded": 2025,
+  "contact": {
+    "email": "info@atai-judo-academy.com",
+    "instagramHandle": "@atai_judo_academy",
+    "instagramUrl": "https://www.instagram.com/atai_judo_academy/",
+    "venue": "GISAD – German International School Abu Dhabi",
+    "city": "Abu Dhabi",
+    "country": "United Arab Emirates",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=German+International+School+Abu+Dhabi"
+  },
+  "schedule": [
+    { "day": "thursday", "time": "17:00", "group": "kids" },
+    { "day": "thursday", "time": "18:15", "group": "youth" },
+    { "day": "thursday", "time": "19:30", "group": "adults" },
+    { "day": "saturday", "time": "10:00", "group": "kids" },
+    { "day": "saturday", "time": "11:00", "group": "adults" }
+  ],
+  "images": {
+    "hero": {
+      "src": "/assets/img/hero-dojo.jpg",
+      "width": 1376,
+      "height": 768
+    },
+    "kids": { "src": "/assets/img/kids-class.jpg", "width": 1396, "height": 768 },
+    "grip": { "src": "/assets/img/grip-detail.jpg", "width": 1376, "height": 768 },
+    "randori": { "src": "/assets/img/adult-randori.jpg", "width": 1376, "height": 768 },
+    "hall": { "src": "/assets/img/dojo-hall.jpg", "width": 1376, "height": 768 },
+    "coach": { "src": "/assets/img/coach-teaching.jpg", "width": 1376, "height": 768 },
+    "girls": { "src": "/assets/img/girls-training.jpg", "width": 1376, "height": 768 },
+    "circle": { "src": "/assets/img/team-circle.jpg", "width": 1376, "height": 768 },
+    "competition": { "src": "/assets/img/competition.jpg", "width": 1376, "height": 768 }
+  },
+  "heroImage": "hero",
+  "pageImages": {
+    "home": "hero",
+    "about": "circle",
+    "training": "randori",
+    "team": "coach",
+    "gallery": "kids",
+    "contact": "hall",
+    "legal": "hall"
+  },
+  "gallery": ["kids", "grip", "randori", "coach", "girls", "circle", "hall", "competition"],
+  "homeGallery": ["kids", "grip", "girls", "circle"]
+}

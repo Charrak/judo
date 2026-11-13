@@ -1,0 +1,587 @@
+{
+  "meta": {
+    "tagline": "Entrenamiento de judo certificado para niños, jóvenes y adultos en Abu Dhabi.",
+    "venue": "GISAD – Colegio Internacional Alemán de Abu Dabi",
+    "city": "Abu Dabi",
+    "country": "Emiratos Árabes Unidos"
+  },
+  "nav": {
+    "home": "Inicio",
+    "about": "Nosotros",
+    "training": "Entrenamiento",
+    "team": "Equipo",
+    "gallery": "Galería",
+    "contact": "Contacto",
+    "legal": "Aviso legal"
+  },
+  "actions": {
+    "trial": "Clase de prueba gratuita",
+    "contact": "Contactar",
+    "schedule": "Horarios de entrenamiento",
+    "gallery": "Ver galería",
+    "team": "Conocer al equipo",
+    "instagram": "Seguir en Instagram",
+    "backHome": "Volver al inicio",
+    "allGroups": "Ver todos los grupos",
+    "learnMore": "Saber más",
+    "viewAll": "Ver todo",
+    "moreOnInstagram": "Más en Instagram",
+    "planRoute": "Cómo llegar",
+    "writeMail": "Escribir un correo"
+  },
+  "ui": {
+    "skipToContent": "Ir al contenido",
+    "openMenu": "Abrir el menú",
+    "closeMenu": "Cerrar el menú",
+    "close": "Cerrar",
+    "language": "Idioma",
+    "languageSwitch": "Cambiar de idioma",
+    "menu": "Menú",
+    "mainNav": "Navegación principal",
+    "externalLink": "Se abre en una pestaña nueva",
+    "scrollMore": "Descubrir más",
+    "previousImage": "Imagen anterior",
+    "nextImage": "Imagen siguiente",
+    "imageCounter": "{current} de {total}"
+  },
+  "welcome": {
+    "title": "Bienvenido a la ATAI JUDO ACADEMY",
+    "subtitle": "Elige tu idioma preferido.",
+    "hint": "Tu elección se guardará. Puedes cambiar el idioma en cualquier momento desde el menú."
+  },
+  "values": {
+    "eyebrow": "Nuestros valores",
+    "title": "Lo que el judo aporta y lo que permanece.",
+    "lead": "El judo es más que un deporte. Es una actitud que niños y adultos llevan consigo a su día a día.",
+    "items": [
+      {
+        "title": "Respeto",
+        "text": "Cada entrenamiento empieza y termina con un saludo. Respeto por el compañero, por el entrenador y por uno mismo."
+      },
+      {
+        "title": "Disciplina",
+        "text": "El progreso nace de la repetición. Cultivamos la paciencia, seguimos viniendo y celebramos también los pequeños pasos."
+      },
+      {
+        "title": "Confianza en uno mismo",
+        "text": "Aprender a caer quita el miedo a caer. Esa sensación acompaña mucho más allá del tatami."
+      },
+      {
+        "title": "Comunidad",
+        "text": "Entrenamos juntos, no unos contra otros. Cuando cuesta, el grupo te sostiene."
+      }
+    ]
+  },
+  "programs": {
+    "eyebrow": "Nuestros grupos",
+    "title": "El comienzo adecuado para cada edad",
+    "lead": "Desde la primera voltereta hasta la primera proyección de pie: avanzamos paso a paso, sin presión, pero con una estructura clara.",
+    "agesLabel": "Edad",
+    "durationLabel": "Sesión",
+    "pointsLabel": "Prioridades",
+    "items": [
+      {
+        "title": "Judo Kids",
+        "ages": "5–9 años",
+        "duration": "60 minutos",
+        "text": "Judo lúdico: rodar, caer, primeras proyecciones y mucha alegría de moverse.",
+        "points": [
+          "Coordinación y equilibrio",
+          "Primeras técnicas de judo",
+          "Respeto y juego limpio"
+        ]
+      },
+      {
+        "title": "Judo Youth",
+        "ages": "10–14 años",
+        "duration": "60 minutos",
+        "text": "Técnica, combate de pie y en el suelo, y primeras experiencias de competición, con una estructura clara y mucha práctica.",
+        "points": [
+          "Técnicas de proyección y suelo",
+          "Primeras competiciones",
+          "Responsabilidad en el dojo"
+        ]
+      },
+      {
+        "title": "Judo Adults",
+        "ages": "desde 15 años",
+        "duration": "75 minutos",
+        "text": "Para principiantes y para quien vuelve: entrenamiento de cuerpo completo, técnica y randori en un grupo adulto.",
+        "points": [
+          "Técnica y randori",
+          "Fuerza, resistencia, movilidad",
+          "Incorporación en cualquier momento"
+        ]
+      }
+    ]
+  },
+  "schedule": {
+    "eyebrow": "Horarios",
+    "title": "Dos veces por semana en el tatami",
+    "lead": "Entrenamos los jueves y los sábados en Abu Dhabi, con niños y adultos en grupos separados.",
+    "note": "Los cambios de última hora y las vacaciones se anuncian en Instagram.",
+    "columns": {
+      "day": "Día",
+      "time": "Hora",
+      "group": "Grupo"
+    },
+    "days": {
+      "thursday": "Jueves",
+      "saturday": "Sábado"
+    },
+    "groups": {
+      "kids": "Judo Kids",
+      "youth": "Judo Youth",
+      "adults": "Judo Adults"
+    },
+    "venueLabel": "Lugar",
+    "cta": "Todos los horarios"
+  },
+  "footer": {
+    "explore": "Descubre",
+    "contact": "Contacto",
+    "legalTitle": "Legal",
+    "location": "Lugar de entrenamiento",
+    "hours": "Horarios",
+    "hoursValue": "Jueves y sábado",
+    "follow": "Síguenos",
+    "languages": "Idioma",
+    "rights": "© {year} ATAI JUDO ACADEMY. Todos los derechos reservados.",
+    "tagline": "Judo para niños, jóvenes y adultos en Abu Dhabi."
+  },
+  "form": {
+    "title": "Solicitar una clase de prueba",
+    "lead": "Cuéntanos brevemente quién eres y qué buscas. Te responderemos personalmente.",
+    "fields": {
+      "name": {
+        "label": "Nombre",
+        "placeholder": "Nombre y apellidos"
+      },
+      "email": {
+        "label": "Correo electrónico",
+        "placeholder": "tu@email.com"
+      },
+      "phone": {
+        "label": "Teléfono (opcional)",
+        "placeholder": "+971 …"
+      },
+      "interest": {
+        "label": "Me interesa",
+        "options": {
+          "kids": "Judo Kids (5–9 años)",
+          "youth": "Judo Youth (10–14 años)",
+          "adults": "Judo Adults (desde 15 años)",
+          "trial": "Clase de prueba gratuita",
+          "other": "Consulta general"
+        }
+      },
+      "message": {
+        "label": "Mensaje",
+        "placeholder": "Cuéntanos un poco sobre ti y tus objetivos."
+      },
+      "consent": {
+        "label": "He leído la {link} y acepto el tratamiento de mis datos.",
+        "linkText": "política de privacidad"
+      }
+    },
+    "submit": "Enviar mensaje",
+    "submitting": "Enviando …",
+    "privacyHint": "Tus datos solo se utilizan para atender tu solicitud.",
+    "errors": {
+      "name": "Escribe tu nombre, por favor.",
+      "email": "Escribe una dirección de correo válida, por favor.",
+      "message": "Escríbenos un mensaje breve de al menos 10 caracteres, por favor.",
+      "consent": "Confirma la política de privacidad, por favor.",
+      "generic": "Lamentablemente no ha funcionado. Inténtalo de nuevo o escríbenos un correo directamente.",
+      "summary": "Revisa los campos marcados, por favor."
+    },
+    "success": {
+      "title": "¡Muchas gracias!",
+      "text": "Hemos recibido tu mensaje. Te responderemos personalmente.",
+      "again": "Enviar otro mensaje"
+    }
+  },
+  "pages": {
+    "home": {
+      "meta": {
+        "title": "ATAI JUDO ACADEMY – Judo para niños y adultos en Abu Dhabi",
+        "description": "Entrenamiento de judo certificado en Abu Dhabi: grupos pequeños, experiencia de entrenador alemán y valores que permanecen. Solicita tu clase de prueba gratuita."
+      },
+      "hero": {
+        "eyebrow": "ATAI JUDO ACADEMY · ABU DHABI",
+        "title": "Judo que te hace fuerte para toda la vida.",
+        "lead": "Entrenamiento de judo certificado con experiencia de entrenador alemán: para niños desde los cinco años, jóvenes y adultos, en grupos pequeños en el corazón de Abu Dhabi.",
+        "primary": "Clase de prueba gratuita",
+        "secondary": "Ver horarios",
+        "stats": [
+          {
+            "value": "30 %",
+            "label": "de chicas en nuestros grupos infantiles"
+          },
+          {
+            "value": "2×",
+            "label": "entrenamientos por semana"
+          },
+          {
+            "value": "5–99",
+            "label": "años: del más pequeño al adulto"
+          }
+        ]
+      },
+      "intro": {
+        "eyebrow": "Bienvenido",
+        "title": "Un hogar deportivo en Abu Dhabi",
+        "textPrimary": "La ATAI JUDO ACADEMY es una escuela de judo para niños, jóvenes y adultos. Unimos la metodología clara del judo alemán con la apertura de una ciudad internacional.",
+        "textSecondary": "En nuestro tatami no importa de dónde vienes ni cuánta fuerza traes. Lo que importa es que vuelvas, semana tras semana.",
+        "signature": "Mohamed Charrak · Fundador y entrenador principal",
+        "badges": [
+          "Grupos pequeños",
+          "Entrenadores certificados",
+          "Clase de prueba gratuita"
+        ]
+      },
+      "coach": {
+        "eyebrow": "El entrenador",
+        "title": "Experiencia alemana, mirada internacional",
+        "text": "Mohamed Charrak lleva muchos años activo como judoca, entrenador y árbitro. Tras su etapa en Alemania, hoy vive y trabaja en Abu Dhabi, donde transmite lo que a él mismo le marcó: técnica limpia, paciencia y respeto.",
+        "quote": "El judo es una escuela de vida.",
+        "cta": "Más sobre el equipo"
+      },
+      "gallery": {
+        "eyebrow": "Impresiones",
+        "title": "Momentos sobre el tatami",
+        "lead": "Algunas impresiones de nuestro dojo en Abu Dhabi."
+      },
+      "cta": {
+        "title": "Tu primera clase es gratuita.",
+        "text": "Ven con ropa deportiva cómoda; lo demás lo aclaramos juntos.",
+        "primary": "Solicitar clase de prueba",
+        "secondary": "¿Preguntas? Escríbenos"
+      }
+    },
+    "about": {
+      "meta": {
+        "title": "Nosotros – ATAI JUDO ACADEMY, escuela de judo en Abu Dhabi",
+        "description": "De Alemania a Abu Dhabi: la historia de la ATAI JUDO ACADEMY, nuestros valores y nuestros objetivos."
+      },
+      "hero": {
+        "eyebrow": "Nosotros",
+        "title": "Una escuela de judo que transmite valores.",
+        "lead": "De Alemania a Abu Dhabi: la ATAI JUDO ACADEMY nació de la convicción de que el judo te acompaña toda la vida."
+      },
+      "story": {
+        "eyebrow": "Nuestra historia",
+        "title": "Un proyecto del corazón, a 5.000 kilómetros de casa",
+        "paragraphs": [
+          "Mohamed Charrak aprendió judo en Alemania desde la base: como competidor, como entrenador y como árbitro. Hace unos años se trasladó a Abu Dhabi y allí abrió su propia escuela, la ATAI JUDO ACADEMY.",
+          "En Abu Dhabi el judo aún no está tan arraigado como en Alemania. Ahí está precisamente la oportunidad: muchas familias están descubriendo este deporte. Cuando los padres ven con qué calma y concentración trabajan sus hijos en el tatami, quedan encantados.",
+          "Hoy una gran parte de nuestros grupos infantiles está formada por chicas: alrededor del 30 por ciento. Para nosotros no es un detalle, sino una señal de que el judo llega para quedarse."
+        ]
+      },
+      "philosophy": {
+        "eyebrow": "Filosofía",
+        "title": "La técnica vence a la fuerza",
+        "paragraphs": [
+          "El judo vive del momento oportuno, del equilibrio y de la agarrada correcta, no de la fuerza bruta. Eso es justo lo que aprenden nuestros judocas desde la primera clase: agarrar con control, girar con limpieza, caer con seguridad.",
+          "Y la diversión no se queda por el camino. Quien ve progresos, sigue viniendo; y quien sigue, mejora."
+        ],
+        "quote": "El judo es una escuela de vida."
+      },
+      "goals": {
+        "eyebrow": "Nuestros objetivos",
+        "title": "Crecer paso a paso",
+        "items": [
+          {
+            "title": "Ampliar los grupos",
+            "text": "Ampliamos horarios, categorías de edad y grupos, a un ritmo que no ponga en riesgo la calidad."
+          },
+          {
+            "title": "Experiencia en competición",
+            "text": "Nuestro objetivo: competir en el campeonato nacional de los Emiratos Árabes Unidos con uno de nuestros talentos."
+          },
+          {
+            "title": "Buenos entrenadores",
+            "text": "Seguimos formándonos, trabajamos con entrenadores invitados y mantenemos nuestra metodología actualizada."
+          }
+        ]
+      }
+    },
+    "training": {
+      "meta": {
+        "title": "Entrenamiento de judo en Abu Dhabi – grupos y horarios",
+        "description": "Judo para niños desde los 5 años, jóvenes y adultos en Abu Dhabi: horarios, grupos y todo lo necesario para tu primera clase."
+      },
+      "hero": {
+        "eyebrow": "Entrenamiento",
+        "title": "Un entrenamiento que crece contigo",
+        "lead": "Grupos pequeños, estructura clara y entrenadores que ven cada progreso, desde la primera voltereta hasta la primera proyección."
+      },
+      "groups": {
+        "eyebrow": "Los grupos de un vistazo",
+        "title": "Tres grupos, un objetivo",
+        "lead": "Cada grupo tiene su propio ritmo. Puedes incorporarte a cualquier grupo en cualquier momento."
+      },
+      "firstSteps": {
+        "eyebrow": "Primera clase",
+        "title": "Cómo empezar",
+        "lead": "No necesitas experiencia previa ni equipo. Ven y ya está.",
+        "items": [
+          {
+            "title": "Llega 15 minutos antes",
+            "text": "Así hay tiempo para llegar, cambiarse y hacer las primeras preguntas."
+          },
+          {
+            "title": "Ropa deportiva suficiente",
+            "text": "Para la clase de prueba bastan un pantalón largo y una camiseta. Nosotros te prestamos un judogi."
+          },
+          {
+            "title": "Descalzo en el tatami",
+            "text": "El calzado se queda al borde del tatami. Ven con los pies limpios y las uñas cortas."
+          },
+          {
+            "title": "Las preguntas son bienvenidas",
+            "text": "Si algo no está claro, pregúntanos: para eso está la primera clase."
+          }
+        ]
+      },
+      "faq": {
+        "eyebrow": "Preguntas frecuentes",
+        "title": "Bueno saberlo",
+        "items": [
+          {
+            "q": "¿Necesito un judogi?",
+            "a": "Para la clase de prueba no. Después te recomendamos tener tu propio gi; te asesoramos sobre talla y calidad."
+          },
+          {
+            "q": "¿A partir de qué edad pueden empezar los niños?",
+            "a": "Nuestro grupo infantil empieza a los cinco años. Para los más pequeños, el movimiento y el juego son lo primero."
+          },
+          {
+            "q": "¿Pueden los padres mirar?",
+            "a": "Sí, los padres son bienvenidos. Solo te pedimos que te quedes al borde del tatami y no interrumpas la clase."
+          },
+          {
+            "q": "¿Es peligroso el judo?",
+            "a": "El judo es uno de los deportes de combate más seguros. Las caídas, las técnicas controladas y la supervisión cualificada son nuestra prioridad."
+          },
+          {
+            "q": "¿Puedo empezar de adulto?",
+            "a": "En cualquier momento. Nuestro grupo de adultos está abierto a principiantes y a quienes vuelven, sin presión de rendimiento."
+          },
+          {
+            "q": "¿Cuánto cuesta la cuota?",
+            "a": "El coste depende del grupo. Habla con nosotros: te lo explicamos con calma y sin compromiso."
+          }
+        ]
+      }
+    },
+    "team": {
+      "meta": {
+        "title": "Equipo – Mohamed Charrak y la ATAI JUDO ACADEMY",
+        "description": "Conoce a nuestro fundador y entrenador principal Mohamed Charrak: experiencia alemana, metodología clara y judo con corazón."
+      },
+      "hero": {
+        "eyebrow": "Equipo",
+        "title": "Personas que viven el judo.",
+        "lead": "Un entrenador que viene de Alemania y una escuela que se beneficia de su experiencia."
+      },
+      "founder": {
+        "eyebrow": "Fundador y entrenador principal",
+        "name": "Mohamed Charrak",
+        "role": "Fundador y entrenador principal",
+        "text": "Mohamed Charrak creció en Alemania como judoca, entrenador y árbitro. Hoy vive en Abu Dhabi, donde ha construido su propia escuela: la ATAI JUDO ACADEMY. Su exigencia es sencilla: técnica limpia, trato respetuoso y un entrenamiento que aporte algo a cada persona.",
+        "facts": [
+          {
+            "label": "Experiencia",
+            "value": "Judoca, entrenador y árbitro en activo"
+          },
+          {
+            "label": "Trayectoria",
+            "value": "Alemania · Abu Dhabi"
+          },
+          {
+            "label": "Prioridades",
+            "value": "Entrenamiento de niños y adultos"
+          },
+          {
+            "label": "Idiomas en el entrenamiento",
+            "value": "Alemán e inglés"
+          }
+        ]
+      },
+      "philosophy": {
+        "eyebrow": "Filosofía de entrenador",
+        "title": "Tres principios que marcan cada sesión",
+        "items": [
+          {
+            "title": "La técnica antes que la fuerza",
+            "text": "Explicamos por qué funciona un movimiento y lo practicamos hasta que se siente seguro."
+          },
+          {
+            "title": "Paciencia en lugar de presión",
+            "text": "Nadie tiene que mejorar rápido. Cada uno aprende a su ritmo."
+          },
+          {
+            "title": "El respeto como base",
+            "text": "Nos saludamos, nos ayudamos y cuidamos los unos de los otros."
+          }
+        ]
+      },
+      "join": {
+        "eyebrow": "Participa",
+        "title": "¿Quieres formar parte del equipo?",
+        "text": "Estamos creciendo y buscamos entrenadores y ayudantes a quienes les guste trabajar con niños y adultos. La experiencia en judo es bienvenida, pero no es imprescindible en todos los puestos.",
+        "cta": "Ponte en contacto con nosotros"
+      }
+    },
+    "gallery": {
+      "meta": {
+        "title": "Galería – impresiones de la ATAI JUDO ACADEMY",
+        "description": "Fotos del entrenamiento de judo en Abu Dhabi: niños, jóvenes y adultos sobre el tatami."
+      },
+      "hero": {
+        "eyebrow": "Galería",
+        "title": "Momentos sobre el tatami",
+        "lead": "Entrenamiento, concentración y comunidad: algunas impresiones de nuestro dojo."
+      },
+      "captions": {
+        "kids": "Clase infantil del sábado",
+        "grip": "La agarrada en detalle",
+        "randori": "Randori en el grupo de adultos",
+        "coach": "El entrenador explica la técnica",
+        "girls": "Chicas en el entrenamiento",
+        "circle": "El círculo del equipo al final de la clase",
+        "hall": "Nuestro dojo en Abu Dhabi",
+        "competition": "Ganar experiencia en competición"
+      },
+      "note": "En Instagram encontrarás más fotos y vídeos actuales."
+    },
+    "contact": {
+      "meta": {
+        "title": "Contacto – solicita una clase de prueba en Abu Dhabi",
+        "description": "Solicita tu clase de prueba gratuita o envíanos tu pregunta. Respondemos personalmente."
+      },
+      "hero": {
+        "eyebrow": "Contacto",
+        "title": "Pásate o escríbenos.",
+        "lead": "Solicita tu clase de prueba gratuita o haznos tu pregunta. Respondemos personalmente."
+      },
+      "info": {
+        "locationTitle": "Lugar de entrenamiento",
+        "locationNote": "Dojo de la ATAI JUDO ACADEMY",
+        "instagramTitle": "Instagram",
+        "instagramNote": "Fotos, vídeos y horarios actuales",
+        "hoursTitle": "Horarios",
+        "hoursNote": "Jueves y sábado",
+        "languagesTitle": "Idiomas",
+        "languagesNote": "Hablamos alemán e inglés.",
+        "responseTitle": "Tiempo de respuesta",
+        "responseNote": "Normalmente en 24 horas."
+      },
+      "noscript": "Tu navegador está bloqueando el formulario. Escríbenos directamente un correo y te responderemos."
+    },
+    "legal": {
+      "meta": {
+        "title": "Aviso legal y privacidad – ATAI JUDO ACADEMY",
+        "description": "Aviso legal e información sobre protección de datos de la ATAI JUDO ACADEMY en Abu Dhabi."
+      },
+      "hero": {
+        "eyebrow": "Legal",
+        "title": "Aviso legal y privacidad",
+        "lead": "La transparencia forma parte del trato: aquí encontrarás toda la información sobre el proveedor, los contenidos y tus datos."
+      },
+      "updated": "Última actualización: noviembre de 2025",
+      "imprint": {
+        "title": "Aviso legal",
+        "sections": [
+          {
+            "title": "Datos según el artículo 5 de la DDG",
+            "paragraphs": [
+              "ATAI JUDO ACADEMY",
+              "Titular: Mohamed Charrak",
+              "Lugar de entrenamiento: {venue}, {city}, {country}"
+            ]
+          },
+          {
+            "title": "Contacto",
+            "paragraphs": [
+              "Correo electrónico: {email}",
+              "Instagram: {instagram}"
+            ]
+          },
+          {
+            "title": "Responsable del contenido",
+            "paragraphs": [
+              "Mohamed Charrak, dirección arriba indicada."
+            ]
+          },
+          {
+            "title": "Responsabilidad sobre los contenidos",
+            "paragraphs": [
+              "Como proveedor somos responsables de los contenidos propios de estas páginas. Revisamos todos los contenidos con cuidado, pero no garantizamos su actualidad, exhaustividad y exactitud.",
+              "Los operadores de los enlaces externos son los únicos responsables de sus contenidos. En el momento de enlazarlos no se apreciaba ningún contenido ilícito."
+            ]
+          },
+          {
+            "title": "Derechos de autor",
+            "paragraphs": [
+              "Los contenidos y obras de este sitio web están protegidos por derechos de autor. La reproducción, edición y difusión fuera de los límites legales requieren nuestro consentimiento por escrito.",
+              "Todas las fotos muestran el entrenamiento de la ATAI JUDO ACADEMY."
+            ]
+          }
+        ]
+      },
+      "privacy": {
+        "title": "Protección de datos",
+        "sections": [
+          {
+            "title": "Responsable del tratamiento",
+            "paragraphs": [
+              "ATAI JUDO ACADEMY, Mohamed Charrak, {city}, {country}. Correo electrónico: {email}"
+            ]
+          },
+          {
+            "title": "Alojamiento y archivos de registro",
+            "paragraphs": [
+              "Al visitar nuestro sitio web, el servidor registra datos técnicos como la dirección IP, la fecha y hora del acceso, la página solicitada y el tipo de navegador. Estos datos sirven a la seguridad y a la prestación técnica y no se combinan con otros datos."
+            ]
+          },
+          {
+            "title": "Formulario de contacto",
+            "paragraphs": [
+              "Si nos escribes a través del formulario, tratamos tu nombre, tu dirección de correo, opcionalmente tu teléfono y tu mensaje para atender tu solicitud. La base legal es nuestro interés legítimo en responder a tu consulta.",
+              "Los datos se eliminan en cuanto dejan de ser necesarios para la tramitación."
+            ]
+          },
+          {
+            "title": "Idioma seleccionado",
+            "paragraphs": [
+              "Guardamos el idioma elegido localmente en tu navegador para que el sitio aparezca en el mismo idioma en tu próxima visita. Esta información permanece en tu dispositivo y no se nos transmite.",
+              "No utilizamos cookies de análisis ni de publicidad, ni hacemos seguimiento."
+            ]
+          },
+          {
+            "title": "Instagram",
+            "paragraphs": [
+              "Enlazamos con nuestro perfil de Instagram. Al abrir Instagram se aplican las normas de privacidad del proveedor. No tenemos influencia sobre el tratamiento de datos que allí se realiza."
+            ]
+          },
+          {
+            "title": "Tus derechos",
+            "paragraphs": [
+              "Tienes derecho a la información, rectificación, supresión y limitación del tratamiento de tus datos, así como a oponerte. Basta un breve mensaje a {email}.",
+              "También puedes presentar una reclamación ante una autoridad de control de protección de datos."
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "notFound": {
+    "eyebrow": "Error 404",
+    "title": "Esta página no existe.",
+    "text": "Puede que se haya movido o que el enlace ya no esté actualizado. En la página de inicio encontrarás todo lo demás.",
+    "home": "Volver al inicio",
+    "contact": "Contactar"
+  }
+}
