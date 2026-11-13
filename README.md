@@ -234,7 +234,7 @@ Die Tests brauchen keine Abhängigkeiten (`node:test`) und laufen in unter einer
 
 **Variante A – statisch:** `npm run build` und den Inhalt von `dist/` auf einen beliebigen Static-Host legen. Für die Sprach-Persistenz ist `index.html` im Wurzelverzeichnis nötig. Das Kontaktformular benötigt dann ein Serverless-Pendant zu `POST /api/contact`.
 
-**Variante B – mit Server (empfohlen):** `npm start` (oder `node server.mjs` hinter einem Reverse Proxy). Der Server liefert `dist/` aus, wählt die sprachabhängige 404-Seite, verarbeitet das Formular und stellt den Admin-Bereich unter `/admin/` bereit. Für HTTPS im Proxy `X-Forwarded-Proto: https` weitergeben. `content/` und `data/` müssen dauerhaft gespeichert bleiben (Volume oder Repository).
+**Variante B – mit Server (empfohlen):** Schrittanleitung inklusive Cloud-Netzwerk, systemd und HTTPS in [`DEPLOY.md`](DEPLOY.md). `npm start` (oder `node server.mjs` hinter einem Reverse Proxy). Der Server liefert `dist/` aus, wählt die sprachabhängige 404-Seite, verarbeitet das Formular und stellt den Admin-Bereich unter `/admin/` bereit. Für HTTPS im Proxy `X-Forwarded-Proto: https` weitergeben. `content/` und `data/` müssen dauerhaft gespeichert bleiben (Volume oder Repository).
 
 Vor dem Livegang:
 

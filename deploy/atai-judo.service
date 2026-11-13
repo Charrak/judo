@@ -1,0 +1,25 @@
+[Unit]
+Description=ATAI JUDO ACADEMY Website und Verwaltung
+Documentation=https://github.com/Charrak/judo
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=atai
+Group=atai
+WorkingDirectory=/srv/atai-judo
+Environment=NODE_ENV=production
+Environment=PORT=3000
+Environment=HOST=127.0.0.1
+EnvironmentFile=-/etc/atai-judo.env
+ExecStart=/usr/bin/node server.mjs
+Restart=always
+RestartSec=3
+# Verwaltung und Uploads brauchen Schreibrechte in content/ und data/
+ReadWritePaths=/srv/atai-judo/content /srv/atai-judo/data /srv/atai-judo/dist
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
