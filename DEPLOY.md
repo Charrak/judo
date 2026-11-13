@@ -181,8 +181,16 @@ Diese Datei regelmäßig kopieren (z. B. per Cron auf ein zweites Volume).
 Abschnitt **Instance access** bzw. **Primary VNIC** → **Public IPv4 address** (mit
 Kopiersymbol).
 
+Auf dem Server selbst verrät ein einziger Befehl die öffentliche Adresse:
+
+```bash
+curl -s https://ifconfig.me; echo
+```
+
 Eine Adresse aus `10.0.0.0/8` (z. B. `10.1.0.239`) ist die **private** Adresse im VCN –
-darüber ist der Server aus dem Internet nicht erreichbar. Fehlt die öffentliche IP:
+darüber ist der Server aus dem Internet nicht erreichbar. Adressen wie `92.x` oder
+`84.x` gehören meist zum eigenen Anschluss zu Hause und führen im Browser zu einer
+leeren Seite. Fehlt die öffentliche IP:
 
 1. *Attached VNICs* → die VNIC öffnen → **IPv4 Addresses** → Zeile der privaten
    Adresse → Menü (⋮) → **Edit** → **Ephemeral public IP** → speichern.
