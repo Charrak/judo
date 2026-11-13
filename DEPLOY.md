@@ -151,6 +151,16 @@ Diese Datei regelmäßig kopieren (z. B. per Cron auf ein zweites Volume).
    (Logo, Trainingszeiten, Bilder, Rechtstexte).
 3. Prüfen: `https://…/de/`, Sprachwechsel, Kontaktformular, `/admin/`, `/sitemap.xml`, `/robots.txt`.
 
+## Häufige Fehlermeldungen beim Anlegen
+
+| Meldung | Ursache | Lösung |
+| --- | --- | --- |
+| `Specified CIDR block 10.0.0.0/24 is not contained in its respective VCN CIDR blocks 10.1.0.0/16` | Das Subnetz liegt außerhalb des VCN-Adressbereichs (Subnetz-Standard `10.0.0.0/24`, VCN aber `10.1.0.0/16`) | In *Networking* entweder das vorhandene VCN wählen (dann passt das Subnetz) oder das Subnetz auf `10.1.0.0/24` ändern – oder das VCN zurück auf `10.0.0.0/16` setzen |
+| `Confidential compute incompatibilities` | Shielded/Confidential computing ist eingeschaltet, Ampere A1 unterstützt das nicht | Beide Schalter im Schritt *Security* aus lassen |
+| `Out of host capacity` | A1-Kapazität im gewählten AD erschöpft | Anderes AD, später erneut, oder `VM.Standard.E2.1.Micro` |
+| DNS-Label rot markiert | Mehr als 15 Zeichen | Kurzes Label wie `ataijudo` |
+| SSH-Login verweigert | Kein oder falscher Schlüssel hinterlegt | Instanz neu anlegen und den öffentlichen Schlüssel einfügen |
+
 ## Wenn du bei Oracle Linux 9 bleibst
 
 Die Anleitung oben nutzt `apt` (Ubuntu). Auf Oracle Linux 9 lauten die
