@@ -61,10 +61,14 @@ Auf der Seite *Create instance* (Basic information):
 | **Assign a public IPv4 address** | ✔ an | ohne öffentliche IP kein Zugriff und kein Zertifikat |
 | **Add SSH keys** | deinen **öffentlichen** Schlüssel einfügen | ohne Key kommt man nicht auf den Server |
 | **Boot volume** | Standard (50 GB) | im Free Tier bis 200 GB möglich |
+| **Security** (Schritt 2) | *Shielded instance* und *Confidential computing* **aus** | beides setzt AMD/Intel-Shapes voraus; mit Ampere A1 meldet die Konsole „incompatibilities" |
 
 Die gelbe Warnung („You can create Ampere A1 compute instances in any availability
 domain … VM.Standard.E2.1.Micro … in AD-1") ist kein Fehler — sie sagt nur, welche
 Shapes wo verfügbar sind. A1.Flex ist überall möglich, also in AD-1, AD-2 oder AD-3.
+
+Im Schritt *Security* nichts einschalten — die Meldung „Confidential compute
+incompatibilities" verschwindet, sobald der Schalter wieder aus ist.
 
 Nach *Create*: öffentliche IP notieren, im DNS zwei A-Records setzen
 (`atai-judo-academy.com` und `www.atai-judo-academy.com`), dann
