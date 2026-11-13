@@ -139,6 +139,27 @@ die Weiterleitung von HTTP auf HTTPS an und erneuert das Zertifikat automatisch
 (`systemctl list-timers | grep certbot`). Die Seite ist bis dahin über HTTP
 erreichbar – für die Verwaltung bitte erst nach dem Zertifikat nutzen.
 
+### Betrieb ohne Domain (nur über die IP)
+
+Solange es keine Domain gibt, nimmt das Skript auch die öffentliche IP als
+Argument – dann setzt es `server_name _;` und die Seite antwortet unter
+`http://<IP>/de/`:
+
+```bash
+sudo bash /srv/atai-judo/deploy/install.sh 92.5.155.209
+```
+
+Grenzen dieses Zwischenstands:
+
+- **Kein HTTPS.** Let's Encrypt stellt für reine IP-Adressen keine Zertifikate
+  aus. Der Admin-Bereich ist damit nur unverschlüsselt erreichbar – Passwort
+  erst setzen, wenn eine Domain mit Zertifikat steht.
+- Kanonische URLs, `hreflang` und `sitemap.xml` verweisen weiterhin auf
+  `siteUrl` aus `src/config/languages.json`. Für Suchmaschinen ist die IP-Variante
+  deshalb nicht gedacht.
+- Der Wechsel auf eine Domain ist ein einzelner Lauf mit Domain als Argument,
+  danach `certbot --nginx`.
+
 ### Admin-Zugang
 
 Beim ersten Start ohne `data/admin.json` gibt der Server einen **Einrichtungscode** aus:
@@ -181,8 +202,16 @@ Diese Datei regelmäßig kopieren (z. B. per Cron auf ein zweites Volume).
 Abschnitt **Instance access** bzw. **Primary VNIC** → **Public IPv4 address** (mit
 Kopiersymbol).
 
+Auf dem Server selbst verrät ein einziger Befehl die öffentliche Adresse:
+
+```bash
+curl -s https://ifconfig.me; echo
+```
+
 Eine Adresse aus `10.0.0.0/8` (z. B. `10.1.0.239`) ist die **private** Adresse im VCN –
-darüber ist der Server aus dem Internet nicht erreichbar. Fehlt die öffentliche IP:
+darüber ist der Server aus dem Internet nicht erreichbar. Adressen wie `92.x` oder
+`84.x` gehören meist zum eigenen Anschluss zu Hause und führen im Browser zu einer
+leeren Seite. Fehlt die öffentliche IP:
 
 1. *Attached VNICs* → die VNIC öffnen → **IPv4 Addresses** → Zeile der privaten
    Adresse → Menü (⋮) → **Edit** → **Ephemeral public IP** → speichern.
@@ -213,6 +242,28 @@ Weitere Stolpersteine:
 - `Permission denied (publickey)` heißt fast immer: falscher Benutzername oder ein
   anderer Schlüssel als der, der bei der Instanz hinterlegt wurde.
 - Beim ersten Verbinden mit `yes` bestätigen.
+
+## Firewall: Security List *und* NSG
+
+Beim Anlegen über den Assistenten entsteht neben der Security List oft eine
+Network Security Group (`ig-quick-action-NSG`). **Beide** müssen den Verkehr
+erlauben – fehlt eine der beiden, kommt der Port nicht durch, während SSH
+weiter funktioniert.
+
+Prüfen auf der Instanz unter *Networking → Primary VNIC*:
+
+- **Network security groups** → NSG öffnen → *Add Rules*: Ingress, Source
+  `0.0.0.0/0`, TCP, Destination Port `80` und `443`
+- **Subnet** (`atai-judo-subnet`) anklicken → *Security Lists* → Standard-Liste →
+  *Add Ingress Rules* mit denselben Werten
+
+Schnelltest vom eigenen Rechner (Windows):
+
+```powershell
+Test-NetConnection -ComputerName 92.5.155.209 -Port 80
+```
+
+`TcpTestSucceeded : True` heißt: Port offen, dann liegt es nicht mehr an der Firewall.
 
 ## Häufige Fehlermeldungen beim Anlegen
 

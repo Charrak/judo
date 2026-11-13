@@ -21,6 +21,16 @@ die() { printf '\n\033[1;31m✗ %s\033[0m\n' "$*" >&2; exit 1; }
 [[ -n "$DOMAIN" ]] || die "Domain fehlt. Beispiel: sudo bash install.sh atai-judo-academy.com"
 command -v apt-get >/dev/null || die "Dieses Skript ist für Ubuntu/Debian gedacht (apt fehlt)."
 
+# Auch eine reine IP-Adresse ist erlaubt: dann läuft die Seite ohne Domain und
+# ohne HTTPS (Let's Encrypt stellt für IP-Adressen keine Zertifikate aus).
+if [[ $DOMAIN =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}$ ]]; then
+  IS_IP=1
+  TARGET="http://$DOMAIN"
+else
+  IS_IP=0
+  TARGET="http://www.$DOMAIN"
+fi
+
 if ! grep -qi ubuntu /etc/os-release; then
   log "Hinweis: kein Ubuntu erkannt – die Paketnamen könnten abweichen."
 fi
@@ -69,6 +79,9 @@ log "nginx konfigurieren für $DOMAIN"
 sed -e "s#atai-judo-academy\.com#$DOMAIN#g" \
     -e "s#/srv/atai-judo#$APP_DIR#g" \
     "$APP_DIR/deploy/nginx-atai-judo.conf" > /etc/nginx/sites-available/atai-judo
+if [[ $IS_IP -eq 1 ]]; then
+  sed -i "s/^    server_name .*/    server_name _;/" /etc/nginx/sites-available/atai-judo
+fi
 ln -sf /etc/nginx/sites-available/atai-judo /etc/nginx/sites-enabled/atai-judo
 rm -f /etc/nginx/sites-enabled/default
 
@@ -87,7 +100,33 @@ for _ in $(seq 1 20); do
 done
 curl -fsS http://127.0.0.1:3000/de/ >/dev/null || die "Der Dienst antwortet nicht. Log: journalctl -u atai-judo -n 40"
 
-cat <<INFO
+if [[ $IS_IP -eq 1 ]]; then
+  cat <<INFO
+
+$(printf '\033[1;32m✓ Fertig – Betrieb ohne Domain.\033[0m')
+
+Im Browser erreichbar:  $TARGET/de/
+Admin-Bereich:          $TARGET/admin/
+(Setup-Code: journalctl -u atai-judo -n 30 | grep -i setup)
+
+Noch offen:
+
+- HTTPS ist ohne Domain nicht möglich (Let's Encrypt stellt für IP-Adressen
+  keine Zertifikate aus). Das Admin-Passwort geht dabei im Klartext über die
+  Leitung – Passwort also erst setzen, wenn eine Domain mit Zertifikat steht,
+  oder nur in einem Netz, dem du vertraust.
+- Sobald es eine Domain gibt, genügt:
+    sudo bash $APP_DIR/deploy/install.sh deine-domain.de
+    sudo certbot --nginx -d deine-domain.de -d www.deine-domain.de
+  (Die Anleitung dafür aktualisiert sich bei jedem Lauf selbst.)
+
+Betrieb:
+   systemctl status atai-judo
+   journalctl -u atai-judo -f
+   Sicherung: tar czf /root/atai-\$(date +%F).tar.gz -C $APP_DIR content data
+INFO
+else
+  cat <<INFO
 
 $(printf '\033[1;32m✓ Fertig.\033[0m')
 
@@ -110,3 +149,4 @@ Betrieb:
    journalctl -u atai-judo -f
    Sicherung: tar czf /root/atai-\$(date +%F).tar.gz -C $APP_DIR content data
 INFO
+fi
