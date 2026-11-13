@@ -1,5 +1,5 @@
 import { esc, icon, externalHint } from '../../lib/html.mjs';
-import { contactForm, pageHero } from '../components.mjs';
+import { contactForm, pageHero, venueLine } from '../components.mjs';
 
 export function render(ctx) {
   const { t, raw, site } = ctx;
@@ -10,7 +10,7 @@ export function render(ctx) {
     {
       icon: 'pin',
       title: info.locationTitle,
-      value: `${t('meta.venue')}, ${t('meta.city')}`,
+      value: venueLine(t),
       note: info.locationNote,
       href: site.contact.mapsUrl,
       external: true,

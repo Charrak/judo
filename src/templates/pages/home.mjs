@@ -23,7 +23,7 @@ export function render(ctx) {
     .map(
       (stat) => `<div class="hero__stat">
         <dt class="hero__statLabel">${esc(stat.label)}</dt>
-        <dd class="hero__statValue">${esc(stat.value)}</dd>
+        <dd class="hero__statValue" dir="ltr">${esc(stat.value)}</dd>
       </div>`,
     )
     .join('');

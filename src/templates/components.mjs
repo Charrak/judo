@@ -7,6 +7,14 @@ import { esc, attrs, icon, externalHint } from '../lib/html.mjs';
 
 const NAV_ROUTES = ['home', 'about', 'training', 'team', 'gallery', 'contact'];
 
+/** "venue, city" – but not "… Abu Dhabi, Abu Dhabi" when the venue already names it. */
+export function venueLine(t) {
+  const venue = t('meta.venue');
+  const city = t('meta.city');
+  if (!city || venue.toLowerCase().includes(city.toLowerCase())) return venue;
+  return `${venue}, ${city}`;
+}
+
 export function languageMenu(ctx) {
   const { t, lang, route, urlFor, languages } = ctx;
   const current = languages.find((entry) => entry.code === lang);
@@ -15,10 +23,10 @@ export function languageMenu(ctx) {
       const isActive = language.code === lang;
       return `<li>
         <a class="lang-menu__link${isActive ? ' is-active' : ''}" href="${esc(ctx.pageUrl(language.code))}"
-           hreflang="${esc(language.code)}" lang="${esc(language.code)}" dir="${esc(language.dir)}"
+           hreflang="${esc(language.code)}" lang="${esc(language.code)}"
            data-lang-switch="${esc(language.code)}"${isActive ? ' aria-current="true"' : ''}>
           <img class="lang-menu__flag" src="/assets/flags/${esc(language.flag)}.svg" alt="" width="26" height="20" loading="lazy">
-          <span class="lang-menu__name">${esc(language.nativeName)}</span>
+          <span class="lang-menu__name" dir="${esc(language.dir)}">${esc(language.nativeName)}</span>
           <span class="lang-menu__check" aria-hidden="true">${isActive ? icon('check') : ''}</span>
         </a>
       </li>`;
@@ -93,7 +101,7 @@ export function siteFooter(ctx) {
         href="${esc(ctx.pageUrl(language.code))}" hreflang="${esc(language.code)}" lang="${esc(language.code)}"
         data-lang-switch="${esc(language.code)}"${language.code === lang ? ' aria-current="true"' : ''}>
         <img class="footer__flag" src="/assets/flags/${esc(language.flag)}.svg" alt="" width="22" height="17" loading="lazy">
-        <span>${esc(language.nativeName)}</span></a></li>`,
+        <span dir="${esc(language.dir)}">${esc(language.nativeName)}</span></a></li>`,
     )
     .join('');
 
@@ -126,7 +134,7 @@ export function siteFooter(ctx) {
             <ul class="footer__list footer__list--plain" role="list">
               <li>
                 <span class="footer__label">${esc(t('footer.location'))}</span>
-                <a class="footer__link" href="${esc(site.contact.mapsUrl)}" target="_blank" rel="noopener">${esc(t('meta.venue'))}, ${esc(t('meta.city'))}${externalHint(t)}</a>
+                <a class="footer__link" href="${esc(site.contact.mapsUrl)}" target="_blank" rel="noopener">${esc(venueLine(t))}${externalHint(t)}</a>
               </li>
               <li>
                 <span class="footer__label">${esc(t('footer.hours'))}</span>
@@ -455,10 +463,10 @@ export function welcomeOverlay(ctx, { always = false } = {}) {
     .map(
       (language) => `<li>
         <a class="welcome__choice" href="${esc(ctx.pageUrl(language.code))}"
-           hreflang="${esc(language.code)}" lang="${esc(language.code)}" dir="${esc(language.dir)}"
+           hreflang="${esc(language.code)}" lang="${esc(language.code)}"
            data-lang-switch="${esc(language.code)}">
           <img class="welcome__flag" src="/assets/flags/${esc(language.flag)}.svg" alt="" width="40" height="30">
-          <span class="welcome__name">${esc(language.nativeName)}</span>
+          <span class="welcome__name" dir="${esc(language.dir)}">${esc(language.nativeName)}</span>
           <span class="welcome__code" aria-hidden="true">${esc(language.code.toUpperCase())}</span>
         </a>
       </li>`,

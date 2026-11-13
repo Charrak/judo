@@ -34,6 +34,65 @@ const ADMIN_HEADERS = {
     "default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'none'",
 };
 
+const PART_LABELS = {
+  meta: 'SEO',
+  value: 'Wert',
+  href: 'Link',
+  url: 'Link',
+  eyebrow: 'Kicker',
+  title: 'Titel',
+  text: 'Text',
+  lead: 'Einleitung',
+  quote: 'Zitat',
+  note: 'Hinweis',
+  hint: 'Hinweis',
+  label: 'Beschriftung',
+  placeholder: 'Platzhalter',
+  description: 'Beschreibung',
+  tagline: 'Kurztext',
+  venue: 'Trainingsort',
+  city: 'Stadt',
+  country: 'Land',
+  primary: 'Hauptbutton',
+  secondary: 'Zweitbutton',
+  cta: 'Button',
+  points: 'Stichpunkte',
+  ages: 'Altersangabe',
+  duration: 'Dauer',
+  options: 'Auswahl',
+  submit: 'Absenden',
+  success: 'Erfolgsmeldung',
+  errors: 'Fehlermeldung',
+  summary: 'Zusammenfassung',
+  hero: 'Kopfbereich',
+  coach: 'Trainer',
+  founder: 'Gründer',
+  faq: 'FAQ',
+  steps: 'Schritte',
+  items: 'Einträge',
+  values: 'Werte',
+  goals: 'Ziele',
+  stats: 'Kennzahlen',
+  badges: 'Kennzeichen',
+  intro: 'Vorstellung',
+  groups: 'Gruppen',
+  schedule: 'Trainingsplan',
+  team: 'Team',
+  gallery: 'Galerie',
+  legal: 'Rechtliches',
+  languages: 'Sprachen',
+  message: 'Nachricht',
+  consent: 'Einwilligung',
+  name: 'Name',
+  email: 'E-Mail',
+  phone: 'Telefon',
+  interest: 'Interesse',
+  privacy: 'Datenschutz',
+  rights: 'Rechte',
+  explore: 'Entdecken',
+  contact: 'Kontakt',
+};
+
 const MAX_JSON = 4 * 1024 * 1024;
 const MAX_UPLOAD = 8 * 1024 * 1024;
 const MAX_TEXT = 6000;
@@ -286,8 +345,7 @@ export function createAdmin({ rootDir, config, site, rebuild }) {
       label: views.sectionLabel(key),
       fields: groups
         .get(key)
-        .map((field) => ({ ...field, label: fieldLabelFor(field.path, key) }))
-        .sort((a, b) => naturalCompare(a.path, b.path)),
+        .map((field) => ({ ...field, label: fieldLabelFor(field.path, key) })),
     }));
   }
 
@@ -295,7 +353,7 @@ export function createAdmin({ rootDir, config, site, rebuild }) {
     const suffix = dotted.startsWith(`${group}.`) ? dotted.slice(group.length + 1) : dotted;
     return suffix
       .split('.')
-      .map((part) => (/^\d+$/.test(part) ? `#${Number(part) + 1}` : part))
+      .map((part) => (/^\d+$/.test(part) ? `#${Number(part) + 1}` : PART_LABELS[part] ?? part))
       .join(' › ');
   }
 

@@ -420,7 +420,7 @@ export function newsEditorPage({ entry, languages, isNew }) {
         </label>
         <label class="field field--plain">
           <span class="field__label">Adresse (Slug)</span>
-          <input class="input" type="text" data-slug value="${esc(entry.slug)}" placeholder="z-b-erstes-turnier">
+          <input class="input" type="text" data-slug value="${esc(entry.slug)}" placeholder="erstes-turnier">
           <span class="field__hint">Wird in der URL verwendet, z. B. <code>/de/aktuelles/${esc(
             entry.slug || 'erstes-turnier',
           )}/</code></span>

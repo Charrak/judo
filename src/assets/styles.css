@@ -1560,38 +1560,6 @@ html[dir='rtl'] .hero__shade {
 }
 
 /* -------------------------------------------------------------- trial note */
-.trial-note {
-  display: flex;
-  align-items: center;
-  gap: clamp(16px, 3vw, 32px);
-  flex-wrap: wrap;
-}
-
-.trial-note__icon {
-  width: 3.4rem;
-  height: 3.4rem;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--gold-soft);
-  color: var(--gold);
-  flex: none;
-}
-
-.trial-note__text {
-  flex: 1 1 20rem;
-}
-
-.trial-note__title {
-  font-size: clamp(1.3rem, 2.2vw, 1.8rem);
-  margin-block-end: 0.35rem;
-}
-
-.trial-note__lead {
-  color: var(--text-muted);
-  font-size: 0.96rem;
-}
-
 /* --------------------------------------------------------------------- join */
 .join {
   display: flex;
@@ -2720,6 +2688,8 @@ html[lang='ar'] .philosophy__quote {
   }
 
   .site-header__actions {
+    position: relative;
+    z-index: 3;
     margin-inline-start: auto;
   }
 

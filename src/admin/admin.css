@@ -43,6 +43,10 @@
   box-sizing: border-box;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 html {
   -webkit-text-size-adjust: 100%;
 }
@@ -916,12 +920,18 @@ code {
 }
 
 .editor__actions {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding-block-start: 4px;
+  padding-block: 12px;
+  margin-block-start: -4px;
+  background: var(--paper);
+  border-block-start: 1px solid var(--line);
 }
 
 .editor__actions-right {
@@ -977,8 +987,8 @@ code {
 }
 
 .gitem__thumb {
-  width: 132px;
-  height: 90px;
+  width: 118px;
+  height: 82px;
   flex: 0 0 auto;
   border-radius: 8px;
   overflow: hidden;
@@ -993,7 +1003,7 @@ code {
 
 .gitem__fields {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 8px 12px;
   flex: 1 1 auto;
   min-width: 0;

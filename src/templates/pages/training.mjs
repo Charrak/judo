@@ -1,4 +1,4 @@
-import { esc, icon } from '../../lib/html.mjs';
+import { esc } from '../../lib/html.mjs';
 import { ctaBand, faqSection, pageHero, programsSection, scheduleSection } from '../components.mjs';
 
 export function render(ctx) {
@@ -51,16 +51,6 @@ export function render(ctx) {
 
     ${faqSection(ctx)}
 
-    <section class="section section--dark section--tight">
-      <div class="shell trial-note">
-        <p class="trial-note__icon" aria-hidden="true">${icon('belt')}</p>
-        <div class="trial-note__text">
-          <h2 class="trial-note__title">${esc(t('pages.home.cta.title'))}</h2>
-          <p class="trial-note__lead">${esc(t('pages.home.cta.text'))}</p>
-        </div>
-        <a class="btn btn--primary" href="${esc(ctx.urlFor(ctx.lang, 'contact'))}#form">${esc(t('actions.trial'))}${icon('arrow', 'btn__icon')}</a>
-      </div>
-    </section>
 
     ${ctaBand(ctx, 'home')}
   `;

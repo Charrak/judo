@@ -1,7 +1,7 @@
 import { esc } from '../lib/html.mjs';
 import { localeUrl, urlFor } from '../lib/i18n.mjs';
 import { icon } from '../lib/html.mjs';
-import { siteHeader, siteFooter, welcomeOverlay, lightbox } from './components.mjs';
+import { siteHeader, siteFooter, welcomeOverlay, lightbox, venueLine } from './components.mjs';
 
 export const STORAGE_KEY = 'atai.lang';
 export const SWITCH_FLAG = 'atai.switch';
@@ -246,7 +246,7 @@ export function renderRoot(ctx) {
       <p class="welcome__hint">${esc(t('welcome.hint'))}</p>
     </div>
   </div>
-  <p class="root__meta">${icon('pin')}<span>${esc(t('meta.venue'))}, ${esc(t('meta.city'))}</span></p>
+  <p class="root__meta">${icon('pin')}<span>${esc(venueLine(t))}</span></p>
   <script src="/assets/app.js" defer></script>
 </body>
 </html>
