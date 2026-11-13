@@ -1,4 +1,4 @@
-import { esc, attrs, icon, externalHint } from '../lib/html.mjs';
+import { esc, icon, externalHint } from '../lib/html.mjs';
 
 /**
  * All markup lives here. Every string comes from the translation dictionary
@@ -16,7 +16,7 @@ export function venueLine(t) {
 }
 
 export function languageMenu(ctx) {
-  const { t, lang, route, urlFor, languages } = ctx;
+  const { t, lang, languages } = ctx;
   const current = languages.find((entry) => entry.code === lang);
   const options = languages
     .map((language) => {
@@ -88,7 +88,7 @@ export function siteHeader(ctx) {
 }
 
 export function siteFooter(ctx) {
-  const { t, lang, route, urlFor, site, year, languages } = ctx;
+  const { t, lang, urlFor, site, year, languages } = ctx;
   const navRoutes = ctx.hasNews ? ['home', 'about', 'training', 'news', 'team', 'gallery', 'contact'] : NAV_ROUTES;
   const navLinks = navRoutes.map(
     (key) =>
@@ -242,7 +242,7 @@ export function programsSection(ctx, { tone = 'cream', showLinks = true, head = 
 }
 
 export function scheduleTable(ctx, { withCta = true } = {}) {
-  const { t, raw, site } = ctx;
+  const { t, site } = ctx;
   // Group consecutive slots of the same day so the day is printed once.
   const days = [];
   for (const slot of site.schedule) {
@@ -457,8 +457,8 @@ export function contactForm(ctx) {
   </form>`;
 }
 
-export function welcomeOverlay(ctx, { always = false } = {}) {
-  const { t, lang, languages, urlFor, site } = ctx;
+export function welcomeOverlay(ctx) {
+  const { t, languages, site } = ctx;
   const choices = languages
     .map(
       (language) => `<li>

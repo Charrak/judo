@@ -2,7 +2,7 @@ import { esc, icon } from '../../lib/html.mjs';
 import { ctaBand, pageHero, sectionHead, valuesSection } from '../components.mjs';
 
 export function render(ctx) {
-  const { t, raw, image } = ctx;
+  const { raw, image } = ctx;
   const page = raw('pages.about');
   const story = image('competition');
   const heroImage = 'circle';

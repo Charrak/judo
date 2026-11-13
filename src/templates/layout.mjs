@@ -6,7 +6,7 @@ import { siteHeader, siteFooter, welcomeOverlay, lightbox, venueLine } from './c
 export const STORAGE_KEY = 'atai.lang';
 export const SWITCH_FLAG = 'atai.switch';
 
-function headScript(ctx, urls) {
+function headScript(urls) {
   const map = JSON.stringify(urls).replace(/</g, '\\u003c');
   return `<script>
   (function () {
@@ -76,7 +76,7 @@ export function renderClientData(ctx) {
 }
 
 export function renderDocument(ctx, page, { bodyClass = '', noindex = false } = {}) {
-  const { t, lang, language, config, route, site } = ctx;
+  const { t, lang, language, config, site } = ctx;
   const canonical = config.siteUrl.replace(/\/$/, '') + ctx.pageUrl(lang);
   const alternates = config.languages.map((entry) => ({
     code: entry.code,
@@ -160,7 +160,7 @@ export function renderDocument(ctx, page, { bodyClass = '', noindex = false } = 
     <link rel="icon" href="/assets/icon-512.png" sizes="512x512" type="image/png">
     <link rel="stylesheet" href="/assets/styles.css">
     ${fontPreload}
-    ${headScript(ctx, urls)}
+    ${headScript(urls)}
     <script type="application/ld+json">${JSON.stringify(jsonLd).replace(/</g, '\\u003c')}</script>
 </head>
 <body class="${esc(bodyClass)}">

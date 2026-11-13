@@ -231,14 +231,6 @@ export function sectionOrder(keys) {
   return [...known, ...rest];
 }
 
-function fieldLabel(path, group) {
-  const suffix = path.startsWith(`${group}.`) ? path.slice(group.length + 1) : path;
-  return suffix
-    .split('.')
-    .map((part) => (/^\d+$/.test(part) ? `#${Number(part) + 1}` : part))
-    .join(' › ');
-}
-
 function fieldId(path) {
   return `f-${path.replace(/[^a-zA-Z0-9]+/g, '-')}`;
 }
