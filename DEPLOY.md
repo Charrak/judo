@@ -60,7 +60,7 @@ Auf der Seite *Create instance* (Basic information):
 | **Primary VNIC** | VCN `atai-judo-vcn`, Subnetz *public subnet* | aus Schritt 1 |
 | **Assign a public IPv4 address** | ✔ an | ohne öffentliche IP kein Zugriff und kein Zertifikat |
 | **Add SSH keys** | deinen **öffentlichen** Schlüssel einfügen | ohne Key kommt man nicht auf den Server |
-| **Boot volume** | Standard (50 GB) | im Free Tier bis 200 GB möglich |
+| **Storage** (Schritt 4) | Standard-Boot-Volume (46,6 GB), *Use in-transit encryption* an, eigene Schlüssel **aus** | 46,6 GB reichen für App, Uploads und Logs; im Free Tier sind bis 200 GB möglich |
 | **Security** (Schritt 2) | *Shielded instance* und *Confidential computing* **aus** | beides setzt AMD/Intel-Shapes voraus; mit Ampere A1 meldet die Konsole „incompatibilities" |
 
 Die gelbe Warnung („You can create Ampere A1 compute instances in any availability
