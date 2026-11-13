@@ -656,6 +656,13 @@ html[dir='rtl'] .legal__tocIcon {
 
 .lang-menu__name {
   flex: 1;
+  text-align: left;
+}
+
+/* Auto margins live on the trailing element: its direction is the row's, so
+   the code/check stays at the reading end even when the name itself is RTL. */
+.lang-menu__check {
+  margin-inline-start: auto;
 }
 
 .lang-menu__check .icon {
@@ -2274,12 +2281,18 @@ html[data-entry='pending'] .welcome,
   flex: 1;
   font-size: 1rem;
   font-weight: 500;
+  text-align: left;
 }
 
 .welcome__code {
+  margin-inline-start: auto;
   font-size: 0.68rem;
   letter-spacing: 0.16em;
   color: rgba(247, 243, 234, 0.4);
+}
+
+html[dir='rtl'] :is(.welcome__name, .lang-menu__name) {
+  text-align: right;
 }
 
 .welcome__hint {

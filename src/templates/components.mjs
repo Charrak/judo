@@ -26,7 +26,7 @@ export function languageMenu(ctx) {
            hreflang="${esc(language.code)}" lang="${esc(language.code)}"
            data-lang-switch="${esc(language.code)}"${isActive ? ' aria-current="true"' : ''}>
           <img class="lang-menu__flag" src="/assets/flags/${esc(language.flag)}.svg" alt="" width="26" height="20" loading="lazy">
-          <span class="lang-menu__name" dir="${esc(language.dir)}">${esc(language.nativeName)}</span>
+          <bdi class="lang-menu__name">${esc(language.nativeName)}</bdi>
           <span class="lang-menu__check" aria-hidden="true">${isActive ? icon('check') : ''}</span>
         </a>
       </li>`;
@@ -466,7 +466,7 @@ export function welcomeOverlay(ctx, { always = false } = {}) {
            hreflang="${esc(language.code)}" lang="${esc(language.code)}"
            data-lang-switch="${esc(language.code)}">
           <img class="welcome__flag" src="/assets/flags/${esc(language.flag)}.svg" alt="" width="40" height="30">
-          <span class="welcome__name" dir="${esc(language.dir)}">${esc(language.nativeName)}</span>
+          <bdi class="welcome__name">${esc(language.nativeName)}</bdi>
           <span class="welcome__code" aria-hidden="true">${esc(language.code.toUpperCase())}</span>
         </a>
       </li>`,

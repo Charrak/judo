@@ -194,9 +194,9 @@ export function renderRoot(ctx) {
   const choices = languages
     .map(
       (entry) => `<li>
-        <a class="welcome__choice" href="${esc(urls[entry.code])}" hreflang="${esc(entry.code)}" lang="${esc(entry.code)}" dir="${esc(entry.dir)}" data-lang-switch="${esc(entry.code)}">
+        <a class="welcome__choice" href="${esc(urls[entry.code])}" hreflang="${esc(entry.code)}" lang="${esc(entry.code)}" data-lang-switch="${esc(entry.code)}">
           <img class="welcome__flag" src="/assets/flags/${esc(entry.flag)}.svg" alt="" width="40" height="30">
-          <span class="welcome__name">${esc(entry.nativeName)}</span>
+          <bdi class="welcome__name">${esc(entry.nativeName)}</bdi>
           <span class="welcome__code" aria-hidden="true">${esc(entry.code.toUpperCase())}</span>
         </a>
       </li>`,
