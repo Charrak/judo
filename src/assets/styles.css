@@ -2463,7 +2463,6 @@ html[dir='rtl'] .lightbox__nav--next .icon {
   font-family: var(--font-display);
   font-size: clamp(4rem, 12vw, 9rem);
   line-height: 1;
-  color: transparent;
   -webkit-text-stroke: 1px rgba(201, 161, 90, 0.55);
   letter-spacing: 0.04em;
   color: rgba(201, 161, 90, 0.16);
