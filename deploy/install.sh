@@ -118,7 +118,17 @@ done
 curl -fsS http://127.0.0.1:3000/de/ >/dev/null || die "Der Dienst antwortet nicht. Log: journalctl -u atai-judo -n 40"
 
 if [[ $IS_IP -eq 1 ]]; then
-  cat <<INFO
+  log "Tägliche Sicherung einrichten"
+install -m 755 "$APP_DIR/deploy/backup.sh" /usr/local/bin/atai-backup
+cat > /etc/cron.d/atai-backup <<'CRON'
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+15 3 * * * root /usr/local/bin/atai-backup >> /var/log/atai-backup.log 2>&1
+CRON
+chmod 644 /etc/cron.d/atai-backup
+/usr/local/bin/atai-backup >/dev/null 2>&1 || log "Erste Sicherung übersprungen"
+
+cat <<INFO
 
 $(printf '\033[1;32m✓ Fertig – Betrieb ohne Domain.\033[0m')
 
@@ -140,7 +150,7 @@ Noch offen:
 Betrieb:
    systemctl status atai-judo
    journalctl -u atai-judo -f
-   Sicherung: tar czf /root/atai-\$(date +%F).tar.gz -C $APP_DIR content data
+   Sicherung: atai-backup            (täglich 03:15, Ablage /var/backups/atai)
 INFO
 else
   cat <<INFO
@@ -164,6 +174,6 @@ Nächste Schritte:
 Betrieb:
    systemctl status atai-judo
    journalctl -u atai-judo -f
-   Sicherung: tar czf /root/atai-\$(date +%F).tar.gz -C $APP_DIR content data
+   Sicherung: atai-backup            (täglich 03:15, Ablage /var/backups/atai)
 INFO
 fi
