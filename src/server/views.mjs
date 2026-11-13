@@ -556,7 +556,7 @@ export function messagesPage({ messages }) {
     <ul class="messages" role="list" data-messages data-endpoint="/api/admin/messages">${rows}</ul>`;
 }
 
-export function settingsPage({ site, languages, buildInfo, contentItems, message = '', error = '' }) {
+export function settingsPage({ site, languages, buildInfo, contentItems, mail = null, message = '', error = '' }) {
   return `<div class="page-head">
       <div>
         <h1 class="page-title">Einstellungen</h1>
@@ -614,6 +614,21 @@ export function settingsPage({ site, languages, buildInfo, contentItems, message
         <p class="card__text">Der Admin-Bereich läuft nur auf dem Node-Server (<code>npm start</code>), nicht auf einer rein statischen Auslieferung. Betreibe ihn ausschließlich über HTTPS.</p>
         <p class="card__text">Das Passwort liegt als scrypt-Hash in <code>data/admin.json</code>. Diese Datei gehört nicht ins Repository – sie ist in <code>.gitignore</code> eingetragen.</p>
         <p class="card__text">Passwort vergessen: Server stoppen, <code>data/admin.json</code> löschen, neu starten. Dann wird wieder ein Einrichtungscode angezeigt.</p>
+      </section>
+
+      <section class="card">
+        <h2 class="card__title">Benachrichtigung per E-Mail</h2>
+        ${
+          mail?.active
+            ? `<p class="card__text"><strong>Aktiv.</strong> Jede Anfrage aus dem Kontaktformular wird zusätzlich an <code>${esc(
+                mail.to,
+              )}</code> geschickt (Server: <code>${esc(mail.host)}</code>).</p>
+               <p class="card__meta">Zuletzt versendet: ${
+                 mail.lastSentAt ? esc(new Date(mail.lastSentAt).toLocaleString('de-DE')) : 'noch keine Anfrage'
+               }${mail.lastError ? ` · Letzter Fehler: ${esc(mail.lastError)}` : ''}</p>`
+            : `<p class="card__text">Nicht eingerichtet. Anfragen liegen ausschließlich im Postfach dieser Verwaltung.</p>
+               <p class="card__meta">Zum Einschalten auf dem Server <code>SMTP_HOST</code>, <code>SMTP_USER</code>, <code>SMTP_PASS</code>, <code>SMTP_FROM</code> und <code>MAIL_TO</code> setzen und neu starten. Port 465 nutzt TLS, andere Ports STARTTLS, wenn der Anbieter es anbietet.</p>`
+        }
       </section>
 
       <section class="card">

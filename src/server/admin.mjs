@@ -238,7 +238,7 @@ function countOverrides(overrides) {
 
 /* ------------------------------------------------------------------- module */
 
-export function createAdmin({ rootDir, config, site, rebuild }) {
+export function createAdmin({ rootDir, config, site, rebuild, mail = null }) {
   const auth = createAuth({ dataDir: path.join(rootDir, 'data') });
 
   function currentState() {
@@ -903,6 +903,7 @@ export function createAdmin({ rootDir, config, site, rebuild }) {
             languages: config.languages,
             buildInfo: buildInfo(),
             contentItems: countContentFiles(),
+            mail: typeof mail === 'function' ? mail() : mail,
           };
           if (form.action === 'rebuild') {
             const result = rebuild();
@@ -948,6 +949,7 @@ export function createAdmin({ rootDir, config, site, rebuild }) {
             languages: config.languages,
             buildInfo: buildInfo(),
             contentItems: countContentFiles(),
+            mail: typeof mail === 'function' ? mail() : mail,
             message: url.searchParams.get('flash') ?? '',
           }),
         });

@@ -14,6 +14,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { createAdmin } from './src/server/admin.mjs';
+import { contactNotification, describeMailConfig, mailConfigFromEnv, sendMail } from './src/lib/mail.mjs';
 import { makeRebuilder } from './src/server/rebuild.mjs';
 
 const rootDir = path.dirname(fileURLToPath(import.meta.url));
@@ -24,11 +25,15 @@ const messagesFile = path.join(dataDir, 'contact-messages.jsonl');
 const languagesConfig = JSON.parse(fs.readFileSync(path.join(rootDir, 'src/config/languages.json'), 'utf8'));
 const siteConfig = JSON.parse(fs.readFileSync(path.join(rootDir, 'src/config/site.json'), 'utf8'));
 
+const mailConfig = mailConfigFromEnv();
+const mailStatus = { lastError: '', lastSentAt: '' };
+
 const admin = createAdmin({
   rootDir,
   config: languagesConfig,
   site: siteConfig,
   rebuild: makeRebuilder(rootDir),
+  mail: () => ({ ...describeMailConfig(mailConfig), ...mailStatus }),
 });
 
 const PORT = Number(process.env.PORT) || 3000;
@@ -126,6 +131,21 @@ function validateMessage(payload) {
   };
 }
 
+function notifyOperator(record) {
+  if (!mailConfig) return;
+  const { subject, text } = contactNotification(record, { de: 'Deutsch', en: 'Englisch', ar: 'Arabisch', fr: 'Französisch', es: 'Spanisch' });
+  sendMail(mailConfig, { subject, text })
+    .then(() => {
+      mailStatus.lastSentAt = new Date().toISOString();
+      mailStatus.lastError = '';
+      console.log('[contact] notification sent to', mailConfig.to);
+    })
+    .catch((error) => {
+      mailStatus.lastError = error.message;
+      console.error('[contact] notification failed:', error.message);
+    });
+}
+
 const rateLimit = new Map();
 
 function isRateLimited(ip) {
@@ -187,6 +207,7 @@ async function handleContact(req, res) {
   }
 
   console.log(`[contact] new request from ${record.email} (${record.lang || 'unknown language'})`);
+  notifyOperator(record);
   sendJson(res, 200, { ok: true });
 }
 

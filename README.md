@@ -230,6 +230,26 @@ Die Tests brauchen keine Abhängigkeiten (`node:test`) und laufen in unter einer
 
 ---
 
+### E-Mail-Benachrichtigung (optional)
+
+Anfragen aus dem Kontaktformular landen immer im Postfach unter `/admin/nachrichten`.
+Zusätzlich kann der Server eine E-Mail verschicken – ohne Fremdbibliothek, direkt über SMTP.
+Dafür beim Start Umgebungsvariablen setzen:
+
+```bash
+SMTP_HOST=smtp.anbieter.de      # erforderlich
+SMTP_PORT=587                   # 465 = TLS, sonst STARTTLS sofern angeboten
+SMTP_USER=website@domain.de
+SMTP_PASS=...
+SMTP_FROM="ATAI Website <website@domain.de>"
+MAIL_TO=info@atai-judo-academy.com
+```
+
+Fehlt eine der Pflichtangaben (`SMTP_HOST`, Absender, `MAIL_TO`), wird nichts verschickt –
+das Formular verhält sich unverändert. Unter *Einstellungen* zeigt die Verwaltung, ob die
+Benachrichtigung aktiv ist, an welche Adresse sie geht und ob der letzte Versand geklappt hat.
+Ein Fehler beim Versand wird protokolliert und blockiert die Anfrage nicht.
+
 ## Deployment
 
 **Variante A – statisch:** `npm run build` und den Inhalt von `dist/` auf einen beliebigen Static-Host legen. Für die Sprach-Persistenz ist `index.html` im Wurzelverzeichnis nötig. Das Kontaktformular benötigt dann ein Serverless-Pendant zu `POST /api/contact`.
